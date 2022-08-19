@@ -1,4 +1,4 @@
-package com.example.kurlyui.feature.picking
+package com.maic.kurlyhack.feature.picking
 
 import android.os.Bundle
 import android.widget.Toast
