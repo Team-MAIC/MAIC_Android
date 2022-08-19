@@ -10,7 +10,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KurlyHack">
         <activity
-            android:name=".MainActivity"
+            android:name=".feature.das.DasBarcodeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".feature.das.CountErrorActivity"
+            android:exported="true" />
+        <activity
+            android:name=".feature.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".feature.das.DasActivity"
+            android:exported="true" />
+        <activity
+            android:name=".feature.picking.NoticeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".feature.picking.ItemActivity"
+            android:exported="true" />
+        <activity
+            android:name=".feature.picking.PickingBarCodeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".feature.picking.SelectPickingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".feature.picking.PickingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".feature.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
