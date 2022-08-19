@@ -1,3 +1,68 @@
 <resources>
     <string name="app_name">KurlyHack</string>
+
+    <!-- Login -->
+    <string name="login_title">직원 번호 입력</string>
+    <string name="login_btn">로그인</string>
+
+    <!-- Main -->
+    <string name="main_title">작업 관리</string>
+    <string name="main_btn">작업 시작</string>
+    <string name="main_des">오늘 할당 구역</string>
+    <string name="main_part">피킹 구역 1</string>
+
+    <!-- Picking -->
+    <string name="picking_title">피킹 관리</string>
+    <string name="picking_part">419회차</string>
+    <string name="picking_address">B0-01-01</string>
+    <string name="picking_name">천도복숭아</string>
+    <string name="picking_count">1개</string>
+    <string name="picking_item_name">천도복숭아 1개</string>
+    <string name="picking_pa">419회차 B0-01-01</string>
+    <string name="picking_error">잘못된 정보입니다.</string>
+    <string name="picking_error_des">오류: 만도복숭아</string>
+    <string name="notice">M다스 천도복숭아 3개 부족</string>
+    <string name="notice_confirm">확인</string>
+    <string name="notice_time">3분전</string>
+    <string name="picking_status_all">전체</string>
+    <string name="picking_status_ongoing">진행 중</string>
+    <string name="picking_status_complete">전체 진행 완료</string>
+    <string name="picking_status_complete_mine">나의 진행 완료</string>
+
+
+    <!-- DAS -->
+    <string name="das_title">DAS 관리</string>
+    <string name="das_weight">0g</string>
+    <string name="das_count">(0개)</string>
+    <string name="das_box">BOX 1</string>
+    <string name="das_item1">수박</string>
+    <string name="das_item2">사과</string>
+    <string name="das_item3">치약</string>
+    <string name="das_item4">멜론</string>
+    <string name="das_detail_part">8번 통로 : 2회차</string>
+    <string name="das_count_part">8번 통로 BOX 2</string>
+    <string name="das_count_item">천도복숭아</string>
+    <string name="das_count_number">3</string>
+    <string name="das_count_unit">개</string>
+    <string name="das_count_des">예상 부족 수량 : 3개</string>수
+    <string name="das_count_btn">수량 오류 알림 전송</string>
+    <string name="das_barcode_error1">대기열을 확인해 주시기 바랍니다.</string>
+    <string name="das_barcode_error2">상품을 추가할 수 없습니다.</string>
+
+    <!-- Barcode -->
+    <string name="barcode_number">바코드 번호 입력</string>
+    <string name="barcode_confirm">바코드 확인</string>
+    <string name="barcode_scan">바코드 스캔</string>
+
+    <!-- Dialog -->
+    <string name="dialog_title">바코드 번호 입력</string>
+    <string name="dialog_confirm">확인</string>
+    <string name="filter_title">필터</string>
+    <string name="filter_all">전체</string>
+    <string name="filter_ongoing">진행 중</string>
+    <string name="filter_red">빨강</string>
+    <string name="filter_yellow">노랑</string>
+    <string name="filter_green">초록</string>
+    <string name="filter_blue">파랑</string>
+    <string name="filter_black">검정</string>
 </resources>

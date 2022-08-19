@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".feature.das.DasActivity">
+
+    <TextView
+        android:id="@+id/tv_das_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/das_title"
+        android:background="@color/main_purple"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_das_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_das_title"
+        app:layout_constraintEnd_toEndOf="@+id/tv_das_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_menu" />
+
+    <ImageView
+        android:id="@+id/iv_das_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:paddingStart="4dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_das_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_das_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_question" />
+
+    <ImageView
+        android:id="@+id/iv_das_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_das_title"
+        app:srcCompat="@drawable/ic_filter" />
+
+    <ImageView
+        android:id="@+id/iv_das_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_das_filter"
+        app:layout_constraintStart_toEndOf="@+id/iv_das_filter"
+        app:layout_constraintTop_toTopOf="@+id/iv_das_filter"
+        app:srcCompat="@drawable/oval_fill_red" />
+
+    <TextView
+        android:id="@+id/tv_das_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/das_item1"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_das_red"
+        app:layout_constraintStart_toEndOf="@+id/iv_das_red"
+        app:layout_constraintTop_toTopOf="@+id/iv_das_red" />
+
+    <ImageView
+        android:id="@+id/iv_das_green"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_das_red"
+        app:layout_constraintStart_toStartOf="@+id/iv_das_red"
+        app:layout_constraintTop_toBottomOf="@+id/iv_das_red"
+        app:srcCompat="@drawable/oval_fill_green" />
+
+    <TextView
+        android:id="@+id/tv_das_green"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/das_item3"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_das_green"
+        app:layout_constraintStart_toEndOf="@+id/iv_das_green"
+        app:layout_constraintTop_toTopOf="@+id/iv_das_green" />
+
+    <ImageView
+        android:id="@+id/iv_das_yellow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_das_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_das_red"
+        app:layout_constraintTop_toTopOf="@+id/iv_das_red"
+        app:srcCompat="@drawable/oval_fill_yellow" />
+
+    <TextView
+        android:id="@+id/tv_das_yellow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/das_item2"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_das_yellow"
+        app:layout_constraintStart_toEndOf="@+id/iv_das_yellow"
+        app:layout_constraintTop_toTopOf="@+id/iv_das_yellow" />
+
+    <ImageView
+        android:id="@+id/iv_das_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_das_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_das_green"
+        app:layout_constraintTop_toTopOf="@+id/iv_das_green"
+        app:srcCompat="@drawable/oval_fill_blue" />
+
+    <TextView
+        android:id="@+id/tv_das_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/das_item4"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_das_blue"
+        app:layout_constraintStart_toEndOf="@+id/iv_das_blue"
+        app:layout_constraintTop_toTopOf="@+id/iv_das_blue" />
+
+    <TextView
+        android:id="@+id/tv_das_detail_part"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/das_detail_part"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/iv_das_filter"
+        app:layout_constraintTop_toBottomOf="@+id/iv_das_green" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/ns_das"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_das_barcode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_das_detail_part">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_das"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="12dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_picking_title"
+            tools:listitem="@layout/item_das">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_das_barcode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_active"
+        android:enabled="false"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="@string/barcode_scan"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
