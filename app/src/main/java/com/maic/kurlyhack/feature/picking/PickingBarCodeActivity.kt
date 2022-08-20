@@ -2,7 +2,6 @@ package com.maic.kurlyhack.feature.picking
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.ResultPoint
@@ -12,10 +11,9 @@ import com.journeyapps.barcodescanner.CaptureManager
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.maic.kurlyhack.R
 import com.maic.kurlyhack.databinding.ActivityPickingBarcodeBinding
-import com.maic.kurlyhack.feature.LoginActivity
-import com.maic.kurlyhack.feature.MainActivity
+import com.maic.kurlyhack.feature.OnItemClick
 
-class PickingBarCodeActivity : AppCompatActivity() {
+class PickingBarCodeActivity : AppCompatActivity(), OnItemClick {
     private lateinit var barcodeScannerView: DecoratedBarcodeView
     private lateinit var capture: CaptureManager
     private lateinit var binding: ActivityPickingBarcodeBinding
@@ -64,7 +62,7 @@ class PickingBarCodeActivity : AppCompatActivity() {
     private fun initDialog() {
         binding.btnPickingBarcodeStart.setOnClickListener {
             val dialog = BarcodeDialog(this)
-            dialog.showDialog()
+            dialog.showDialog(this)
         }
     }
 
@@ -104,5 +102,13 @@ class PickingBarCodeActivity : AppCompatActivity() {
 
     fun readBarcode(barcode: String) {
         Toast.makeText(this, barcode, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onClick(value: String) {
+        // TODO: value와 비교. 존재하지 않는 바코드면 토스트 띄우기
+        moveActivity()
+    }
+
+    override fun onListClick(value: ArrayList<String>) {
     }
 }

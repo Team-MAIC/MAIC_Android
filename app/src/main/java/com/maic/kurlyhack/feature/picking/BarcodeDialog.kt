@@ -7,11 +7,12 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import com.maic.kurlyhack.R
+import com.maic.kurlyhack.feature.OnItemClick
 
 class BarcodeDialog(context: Context) {
     private val dialog = Dialog(context)
 
-    fun showDialog() {
+    fun showDialog(onItemClick: OnItemClick) {
         dialog.setContentView(R.layout.dialog_barcode)
         dialog.window!!.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
@@ -29,6 +30,7 @@ class BarcodeDialog(context: Context) {
         }
 
         mBtn.setOnClickListener {
+            onItemClick.onClick(mEt.toString())
             dialog.dismiss()
         }
     }
