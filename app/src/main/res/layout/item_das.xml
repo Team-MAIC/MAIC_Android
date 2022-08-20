@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/oval_fill_white" />
 
     <TextView
-        android:id="@+id/tv_das_part"
+        android:id="@+id/tv_das_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -42,7 +42,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_das_weight"
-        app:layout_constraintStart_toEndOf="@+id/tv_das_part"
+        app:layout_constraintStart_toEndOf="@+id/tv_das_box"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
