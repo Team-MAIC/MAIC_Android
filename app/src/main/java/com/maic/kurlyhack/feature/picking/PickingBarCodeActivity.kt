@@ -2,6 +2,7 @@ package com.maic.kurlyhack.feature.picking
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.ResultPoint
@@ -11,6 +12,8 @@ import com.journeyapps.barcodescanner.CaptureManager
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.maic.kurlyhack.R
 import com.maic.kurlyhack.databinding.ActivityPickingBarcodeBinding
+import com.maic.kurlyhack.feature.LoginActivity
+import com.maic.kurlyhack.feature.MainActivity
 
 class PickingBarCodeActivity : AppCompatActivity() {
     private lateinit var barcodeScannerView: DecoratedBarcodeView
@@ -33,10 +36,9 @@ class PickingBarCodeActivity : AppCompatActivity() {
         capture = CaptureManager(this, barcodeScannerView)
         capture.initializeFromIntent(this.intent, savedInstanceState)
         capture.decode()
-        barcodeScannerView.decodeContinuous(object : BarcodeCallback {
+        barcodeScannerView.decodeSingle(object : BarcodeCallback {
             override fun barcodeResult(result: BarcodeResult) {
                 readBarcode(result.toString())
-                // TODO: api 연결, 성공. 실패값 확인
                 moveActivity()
             }
             override fun possibleResultPoints(resultPoints: List<ResultPoint>) {
@@ -69,6 +71,7 @@ class PickingBarCodeActivity : AppCompatActivity() {
     private fun moveActivity() {
         // TODO: 성공 실패 여부 - 받은 거랑 리스트 클릭 내용이랑 비교 / PickingActiivty로 돌아가거나 ItemActivity(오류)로 이동
         // 실패
+        finish()
         val intent = Intent(this, ItemActivity::class.java)
         intent.putExtra("isSuccess", false)
         intent.putExtra("partAddress", mPartAddress)

@@ -40,11 +40,15 @@ class PickingAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapte
             infoList.add(holder.binding.tvPickingCount.text.toString())
 
             holder.binding.ivPickingBarcode.setOnClickListener {
-                infoList.add("code")
+                infoList.add(3, "code")
                 onItemClick.onListClick(infoList)
             }
-            holder.itemView.setOnClickListener {
-                infoList.add("list")
+            holder.binding.tvPickingName.setOnClickListener {
+                infoList.add(3, "list")
+                onItemClick.onListClick(infoList)
+            }
+            holder.binding.tvPickingAddress.setOnClickListener {
+                infoList.add(3, "list")
                 onItemClick.onListClick(infoList)
             }
         }
