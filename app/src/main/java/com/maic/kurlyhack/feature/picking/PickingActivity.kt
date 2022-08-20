@@ -1,5 +1,6 @@
 package com.maic.kurlyhack.feature.picking
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.local.PickingData
@@ -15,6 +16,7 @@ class PickingActivity : AppCompatActivity() {
 
         getData()
         initAdapter()
+        initClickListener()
 
         setContentView(binding.root)
     }
@@ -43,5 +45,11 @@ class PickingActivity : AppCompatActivity() {
             )
         )
         pickingAdapter.notifyDataSetChanged()
+    }
+
+    private fun initClickListener() {
+        binding.ivPickingNotice.setOnClickListener {
+            startActivity(Intent(this@PickingActivity, NoticeActivity::class.java))
+        }
     }
 }

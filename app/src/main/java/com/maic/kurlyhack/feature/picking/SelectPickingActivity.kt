@@ -16,6 +16,7 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
         binding = ActivitySelectPickingBinding.inflate(layoutInflater)
 
         initAdapter()
+        initClickListener()
 
         setContentView(binding.root)
     }
@@ -33,6 +34,12 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
             )
         )
         selectPickingAdapter.notifyDataSetChanged()
+    }
+
+    private fun initClickListener() {
+        binding.ivSelectPickingNotice.setOnClickListener {
+            startActivity(Intent(this@SelectPickingActivity, NoticeActivity::class.java))
+        }
     }
 
     override fun onClick(value: String) {
