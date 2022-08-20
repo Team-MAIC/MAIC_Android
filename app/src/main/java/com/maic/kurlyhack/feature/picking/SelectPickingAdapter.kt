@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.maic.kurlyhack.data.local.PartData
 import com.maic.kurlyhack.databinding.ItemPartBinding
+import com.maic.kurlyhack.feature.OnItemClick
 
-class SelectPickingAdapter : RecyclerView.Adapter<SelectPickingAdapter.SelectPickingViewHolder>() {
+class SelectPickingAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapter<SelectPickingAdapter.SelectPickingViewHolder>() {
     val partList = mutableListOf<PartData>()
 
-    class SelectPickingViewHolder(private val binding: ItemPartBinding) : RecyclerView.ViewHolder(binding.root) {
+    class SelectPickingViewHolder(val binding: ItemPartBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: PartData) {
             binding.tvPart.text = data.part
             if (data.active) {
@@ -30,6 +31,12 @@ class SelectPickingAdapter : RecyclerView.Adapter<SelectPickingAdapter.SelectPic
 
     override fun onBindViewHolder(holder: SelectPickingViewHolder, position: Int) {
         holder.onBind(partList[position])
+
+        if (holder.binding.tvPart.currentTextColor != Color.LTGRAY) {
+            holder.itemView.setOnClickListener {
+                onItemClick.onClick(holder.binding.tvPart.text.toString())
+            }
+        }
     }
 
     override fun getItemCount(): Int {
