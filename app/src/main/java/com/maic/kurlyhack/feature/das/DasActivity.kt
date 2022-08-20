@@ -1,11 +1,13 @@
 package com.maic.kurlyhack.feature.das
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.local.DasData
 import com.maic.kurlyhack.databinding.ActivityDasBinding
+import com.maic.kurlyhack.feature.OnItemClick
 
-class DasActivity : AppCompatActivity() {
+class DasActivity : AppCompatActivity(), OnItemClick {
     private lateinit var binding: ActivityDasBinding
     private lateinit var dasAdapter: DasAdapter
 
@@ -14,6 +16,7 @@ class DasActivity : AppCompatActivity() {
         binding = ActivityDasBinding.inflate(layoutInflater)
 
         initAdapter()
+        initBtnListener()
 
         setContentView(binding.root)
     }
@@ -36,5 +39,20 @@ class DasActivity : AppCompatActivity() {
             )
         )
         dasAdapter.notifyDataSetChanged()
+    }
+
+    private fun initBtnListener() {
+        binding.ivDasFilter.setOnClickListener {
+            val dialog = FilterDialog(this)
+            dialog.showDialog(this)
+        }
+    }
+
+    override fun onClick(value: String) {
+        // TODO: value값으로
+        Toast.makeText(this, "$value 눌림", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onListClick(value: ArrayList<String>) {
     }
 }
