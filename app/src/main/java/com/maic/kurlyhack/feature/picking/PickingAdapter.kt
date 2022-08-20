@@ -1,6 +1,6 @@
 package com.maic.kurlyhack.feature.picking
 
-import android.util.Log
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +16,12 @@ class PickingAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapte
             binding.tvPickingAddress.text = data.address
             binding.tvPickingName.text = data.name
             binding.tvPickingCount.text = data.count
+
+            if (!data.status) {
+                binding.tvPickingCount.setTextColor(Color.LTGRAY)
+                binding.tvPickingName.setTextColor(Color.LTGRAY)
+                binding.tvPickingAddress.setTextColor(Color.LTGRAY)
+            }
         }
     }
 
@@ -27,12 +33,20 @@ class PickingAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapte
     override fun onBindViewHolder(holder: PickingViewHolder, position: Int) {
         holder.onBind(pickingList[position])
 
-        holder.binding.ivPickingBarcode.setOnClickListener {
-            var infoList = ArrayList<String>()
+        if (holder.binding.tvPickingAddress.currentTextColor != Color.LTGRAY) {
+            val infoList = ArrayList<String>()
             infoList.add(holder.binding.tvPickingAddress.text.toString())
             infoList.add(holder.binding.tvPickingName.text.toString())
             infoList.add(holder.binding.tvPickingCount.text.toString())
-            onItemClick.onListClick(infoList)
+
+            holder.binding.ivPickingBarcode.setOnClickListener {
+                infoList.add("code")
+                onItemClick.onListClick(infoList)
+            }
+            holder.itemView.setOnClickListener {
+                infoList.add("list")
+                onItemClick.onListClick(infoList)
+            }
         }
     }
 

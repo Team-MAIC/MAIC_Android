@@ -36,16 +36,16 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
 
         pickingAdapter.pickingList.addAll(
             listOf(
-                PickingData("B0-01-01", "천도복숭아", "3개"),
-                PickingData("B0-01-03", "수박", "6개"),
-                PickingData("B0-01-03", "사과", "11개"),
-                PickingData("B0-03-02", "치약", "7개"),
-                PickingData("B0-01-02", "멜론", "1개"),
-                PickingData("B0-01-01", "천도복숭아", "3개"),
-                PickingData("B0-01-01", "수박", "6개"),
-                PickingData("B0-01-01", "사과", "11개"),
-                PickingData("B0-01-01", "치약", "7개"),
-                PickingData("B0-01-01", "멜론", "1개")
+                PickingData("B0-01-01", "천도복숭아", "3개", false),
+                PickingData("B0-01-03", "수박", "6개", true),
+                PickingData("B0-01-03", "사과", "11개", true),
+                PickingData("B0-03-02", "치약", "7개", true),
+                PickingData("B0-01-02", "멜론", "1개", false),
+                PickingData("B0-01-01", "천도복숭아", "3개", false),
+                PickingData("B0-01-01", "수박", "6개", false),
+                PickingData("B0-01-01", "사과", "11개", true),
+                PickingData("B0-01-01", "치약", "7개", false),
+                PickingData("B0-01-01", "멜론", "1개", true)
             )
         )
         pickingAdapter.notifyDataSetChanged()
@@ -59,7 +59,7 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
 
     private fun initCategory() {
         with(binding) {
-            ivPickingAll.isSelected = true
+            ivPickingOngoing.isSelected = true
 
             tvPickingAll.setOnClickListener {
                 ivPickingAll.isSelected = true
@@ -92,9 +92,17 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
     }
 
     override fun onListClick(value: ArrayList<String>) {
-        val intent = Intent(this, PickingBarCodeActivity::class.java)
-        intent.putExtra("pickingInfo", value)
-        intent.putExtra("pickingPart", pickingPart)
-        startActivity(intent)
+        if(value[3] == "code") {
+            val intent = Intent(this, PickingBarCodeActivity::class.java)
+            intent.putExtra("pickingInfo", value)
+            intent.putExtra("pickingPart", pickingPart)
+            startActivity(intent)
+        } else {
+            val intent = Intent(this, ItemActivity::class.java)
+            intent.putExtra("isSuccess", true)
+            intent.putExtra("partAddress", pickingPart + " " +  value[0])
+            intent.putExtra("item", value[1] + " " + value[2])
+            startActivity(intent)
+        }
     }
 }
