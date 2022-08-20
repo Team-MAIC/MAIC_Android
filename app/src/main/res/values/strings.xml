@@ -69,4 +69,14 @@
     <string name="error_title">알림</string>
     <string name="error_message1">상품을 추가할 수 없습니다.</string>
     <string name="error_message2">대기열을 확인해 주시기 바랍니다.</string>
+    
+    <!-- Menu -->
+    <string name="menu_title">더보기</string>
+    <string name="menu_work">작업 관리</string>
+    <string name="menu_info">내 정보 관리</string>
+    <string name="menu_announcement">공지사항</string>
+    <string name="menu_personal">개인정보 처리방침</string>
+    <string name="menu_pay">급여명세서</string>
+    <string name="menu_logout">로그아웃</string>
+    <string name="menu_withdrawal">탈퇴하기</string>
 </resources>
