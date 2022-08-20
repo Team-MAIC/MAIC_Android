@@ -47,4 +47,7 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
         intent.putExtra("pickingPart", value)
         startActivity(intent)
     }
+
+    override fun onListClick(value: ArrayList<String>) {
+    }
 }
