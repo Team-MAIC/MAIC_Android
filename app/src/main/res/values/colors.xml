@@ -11,6 +11,7 @@
     <!-- MAIC color -->
     <color name="main_purple">#560C7B</color>
     <color name="light_purple">#F7F1FA</color>
+    <color name="medium_purple">#BA9FC8</color>
     <color name="dark_gray">#444444</color>
     <color name="light_gray">#D6D6D6</color>
     <color name="red">#F20000</color>

@@ -21,15 +21,14 @@
     <string name="picking_pa">419회차 B0-01-01</string>
     <string name="picking_error">잘못된 정보입니다.</string>
     <string name="picking_error_des">오류: 만도복숭아</string>
-    <string name="notice">M다스 천도복숭아 3개 부족</string>
+    <string name="notice">8번 통로 천도복숭아 3개 부족</string>
     <string name="notice_confirm">확인</string>
     <string name="notice_time">3분전</string>
     <string name="picking_status_all">전체</string>
     <string name="picking_status_ongoing">진행 중</string>
     <string name="picking_status_complete">전체 진행 완료</string>
     <string name="picking_status_complete_mine">나의 진행 완료</string>
-
-
+    
     <!-- DAS -->
     <string name="das_title">DAS 관리</string>
     <string name="das_weight">0g</string>
@@ -65,4 +64,19 @@
     <string name="filter_green">초록</string>
     <string name="filter_blue">파랑</string>
     <string name="filter_black">검정</string>
+    
+    <!-- Das Error Dialog -->
+    <string name="error_title">알림</string>
+    <string name="error_message1">상품을 추가할 수 없습니다.</string>
+    <string name="error_message2">대기열을 확인해 주시기 바랍니다.</string>
+    
+    <!-- Menu -->
+    <string name="menu_title">더보기</string>
+    <string name="menu_work">작업 관리</string>
+    <string name="menu_info">내 정보 관리</string>
+    <string name="menu_announcement">공지사항</string>
+    <string name="menu_personal">개인정보 처리방침</string>
+    <string name="menu_pay">급여명세서</string>
+    <string name="menu_logout">로그아웃</string>
+    <string name="menu_withdrawal">탈퇴하기</string>
 </resources>
