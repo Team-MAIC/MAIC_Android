@@ -1,7 +1,7 @@
 package com.maic.kurlyhack.feature.picking
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.ResultPoint
@@ -16,6 +16,8 @@ class PickingBarCodeActivity : AppCompatActivity() {
     private lateinit var barcodeScannerView: DecoratedBarcodeView
     private lateinit var capture: CaptureManager
     private lateinit var binding: ActivityPickingBarcodeBinding
+    private var mPartAddress = ""
+    private var mItem = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +36,8 @@ class PickingBarCodeActivity : AppCompatActivity() {
         barcodeScannerView.decodeContinuous(object : BarcodeCallback {
             override fun barcodeResult(result: BarcodeResult) {
                 readBarcode(result.toString())
+                // TODO: api 연결, 성공. 실패값 확인
+                moveActivity()
             }
             override fun possibleResultPoints(resultPoints: List<ResultPoint>) {
             }
@@ -48,8 +52,10 @@ class PickingBarCodeActivity : AppCompatActivity() {
             val name = infoList[1].toString()
             val count = infoList[2].toString()
             val address = infoList[0].toString()
-            binding.tvPickingBarcodePart.text = "$part $address"
-            binding.tvPickingBarcodeName.text = "$name $count"
+            mPartAddress = "$part $address"
+            mItem = "$name $count"
+            binding.tvPickingBarcodePart.text = mPartAddress
+            binding.tvPickingBarcodeName.text = mItem
         }
     }
 
@@ -58,6 +64,19 @@ class PickingBarCodeActivity : AppCompatActivity() {
             val dialog = BarcodeDialog(this)
             dialog.showDialog()
         }
+    }
+
+    private fun moveActivity() {
+        // TODO: 성공 실패 여부 - 받은 거랑 리스트 클릭 내용이랑 비교 / PickingActiivty로 돌아가거나 ItemActivity(오류)로 이동
+        // 실패
+        val intent = Intent(this, ItemActivity::class.java)
+        intent.putExtra("isSuccess", false)
+        intent.putExtra("partAddress", mPartAddress)
+        intent.putExtra("item", mItem)
+        startActivity(intent)
+
+//        // 성공
+//        finish()
     }
 
     override fun onResume() {
