@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.databinding.ActivityMainBinding
+import com.maic.kurlyhack.feature.das.DasActivity
 import com.maic.kurlyhack.feature.picking.SelectPickingActivity
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         // TODO: 작업내용이 피킹인지 다스인지 확인하고 화면 연결
         binding.btnMainStart.setOnClickListener {
             startActivity(Intent(this@MainActivity, SelectPickingActivity::class.java))
+            startActivity(Intent(this@MainActivity, DasActivity::class.java))
         }
 // startActivity(Intent(this@MainActivity, DasActivity::class.java))
     }

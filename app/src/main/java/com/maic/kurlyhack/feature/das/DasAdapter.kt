@@ -1,7 +1,11 @@
 package com.maic.kurlyhack.feature.das
 
+import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.maic.kurlyhack.R
 import com.maic.kurlyhack.data.local.DasData
@@ -18,7 +22,10 @@ class DasAdapter : RecyclerView.Adapter<DasAdapter.DasViewHolder>() {
                     "노랑" -> ivDasColor.setImageResource(R.drawable.oval_fill_yellow)
                     "초록" -> ivDasColor.setImageResource(R.drawable.oval_fill_green)
                     "파랑" -> ivDasColor.setImageResource(R.drawable.oval_fill_blue)
-                    "검정" -> ivDasColor.setImageResource(R.drawable.oval_fill_black)
+                    "검정" -> {
+                        ivDasColor.setImageResource(R.drawable.oval_fill_black)
+                        ivDasColor.tag = Integer.valueOf(R.drawable.oval_fill_black)
+                    }
                     else -> ivDasColor.setImageResource(R.drawable.oval_fill_white)
                 }
                 tvDasBox.text = data.box
@@ -36,6 +43,15 @@ class DasAdapter : RecyclerView.Adapter<DasAdapter.DasViewHolder>() {
 
     override fun onBindViewHolder(holder: DasViewHolder, position: Int) {
         holder.onBind(dasList[position])
+
+        holder.itemView.setOnClickListener {
+            if (holder.binding.ivDasColor.tag == R.drawable.oval_fill_black) {
+                val intent = Intent(it.context, CountErrorActivity::class.java)
+                intent.putExtra("addressBox", dasList[position].box)
+                intent.putExtra("Item", dasList[position].name)
+                it.context.startActivity(intent)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
