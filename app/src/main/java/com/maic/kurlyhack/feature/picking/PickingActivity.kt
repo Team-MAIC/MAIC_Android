@@ -5,10 +5,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.local.PickingData
 import com.maic.kurlyhack.databinding.ActivityPickingBinding
+import com.maic.kurlyhack.feature.OnItemClick
 
-class PickingActivity : AppCompatActivity() {
+class PickingActivity : AppCompatActivity(), OnItemClick {
     private lateinit var binding: ActivityPickingBinding
     private lateinit var pickingAdapter: PickingAdapter
+    private var pickingPart = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,16 +19,18 @@ class PickingActivity : AppCompatActivity() {
         getData()
         initAdapter()
         initClickListener()
+        initCategory()
 
         setContentView(binding.root)
     }
 
     private fun getData() {
-        binding.tvPickingPart.text = intent.getStringExtra("pickingPart")
+        pickingPart = intent.getStringExtra("pickingPart").toString()
+        binding.tvPickingPart.text = pickingPart
     }
 
     private fun initAdapter() {
-        pickingAdapter = PickingAdapter()
+        pickingAdapter = PickingAdapter(this)
 
         binding.rvPicking.adapter = pickingAdapter
 
@@ -51,5 +55,46 @@ class PickingActivity : AppCompatActivity() {
         binding.ivPickingNotice.setOnClickListener {
             startActivity(Intent(this@PickingActivity, NoticeActivity::class.java))
         }
+    }
+
+    private fun initCategory() {
+        with(binding) {
+            ivPickingAll.isSelected = true
+
+            tvPickingAll.setOnClickListener {
+                ivPickingAll.isSelected = true
+                ivPickingOngoing.isSelected = false
+                ivPickingComplete.isSelected = false
+                ivPickingCompleteMine.isSelected = false
+            }
+            tvPickingOngoing.setOnClickListener {
+                ivPickingAll.isSelected = false
+                ivPickingOngoing.isSelected = true
+                ivPickingComplete.isSelected = false
+                ivPickingCompleteMine.isSelected = false
+            }
+            tvPickingComplete.setOnClickListener {
+                ivPickingAll.isSelected = false
+                ivPickingOngoing.isSelected = false
+                ivPickingComplete.isSelected = true
+                ivPickingCompleteMine.isSelected = false
+            }
+            tvPickingCompleteMine.setOnClickListener {
+                ivPickingAll.isSelected = false
+                ivPickingOngoing.isSelected = false
+                ivPickingComplete.isSelected = false
+                ivPickingCompleteMine.isSelected = true
+            }
+        }
+    }
+
+    override fun onClick(value: String) {
+    }
+
+    override fun onListClick(value: ArrayList<String>) {
+        val intent = Intent(this, PickingBarCodeActivity::class.java)
+        intent.putExtra("pickingInfo", value)
+        intent.putExtra("pickingPart", pickingPart)
+        startActivity(intent)
     }
 }
