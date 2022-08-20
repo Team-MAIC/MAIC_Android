@@ -1,19 +1,17 @@
-package com.maic.kurlyhack.feature.picking
+package com.maic.kurlyhack.feature.das
 
 import android.app.Dialog
 import android.content.Context
 import android.view.WindowManager
 import android.widget.Button
-import android.widget.EditText
-import androidx.core.widget.addTextChangedListener
 import com.maic.kurlyhack.R
 import com.maic.kurlyhack.feature.OnItemClick
 
-class BarcodeDialog(context: Context) {
+class BarcodeErrorDialog(context: Context) {
     private val dialog = Dialog(context)
 
     fun showDialog(onItemClick: OnItemClick) {
-        dialog.setContentView(R.layout.dialog_barcode)
+        dialog.setContentView(R.layout.dialog_barcode_error)
         dialog.window!!.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
@@ -22,15 +20,10 @@ class BarcodeDialog(context: Context) {
         dialog.setCancelable(true)
         dialog.show()
 
-        val mBtn = dialog.findViewById<Button>(R.id.btn_dialog_confirm)
-        val mEt = dialog.findViewById<EditText>(R.id.et_dialog_input)
-
-        mEt.addTextChangedListener {
-            mBtn.isEnabled = mEt.text.toString().isNotEmpty()
-        }
+        val mBtn = dialog.findViewById<Button>(R.id.btn_barcode_error_confirm)
 
         mBtn.setOnClickListener {
-            onItemClick.onClick(mEt.text.toString())
+            onItemClick.onClick("error")
             dialog.dismiss()
         }
     }

@@ -1,5 +1,6 @@
 package com.maic.kurlyhack.feature.das
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +46,10 @@ class DasActivity : AppCompatActivity(), OnItemClick {
         binding.ivDasFilter.setOnClickListener {
             val dialog = FilterDialog(this)
             dialog.showDialog(this)
+        }
+
+        binding.btnDasBarcode.setOnClickListener {
+            startActivity(Intent(this@DasActivity, DasBarcodeActivity::class.java))
         }
     }
 
