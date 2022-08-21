@@ -60,6 +60,10 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
         binding.ivPickingMenu.setOnClickListener {
             showDrawer(binding.drawerLayout, binding.navView)
         }
+
+        binding.tvPickingPart.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initCategory() {
