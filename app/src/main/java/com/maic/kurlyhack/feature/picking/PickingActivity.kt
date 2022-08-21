@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.local.PickingData
 import com.maic.kurlyhack.databinding.ActivityPickingBinding
 import com.maic.kurlyhack.feature.OnItemClick
+import com.maic.kurlyhack.util.showDrawer
 
 class PickingActivity : AppCompatActivity(), OnItemClick {
     private lateinit var binding: ActivityPickingBinding
@@ -55,6 +56,10 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
         binding.ivPickingNotice.setOnClickListener {
             startActivity(Intent(this@PickingActivity, NoticeActivity::class.java))
         }
+
+        binding.ivPickingMenu.setOnClickListener {
+            showDrawer(binding.drawerLayout, binding.navView)
+        }
     }
 
     private fun initCategory() {
@@ -92,7 +97,7 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
     }
 
     override fun onListClick(value: ArrayList<String>) {
-        if(value[3] == "code") {
+        if (value[3] == "code") {
             val intent = Intent(this, PickingBarCodeActivity::class.java)
             intent.putExtra("pickingInfo", value)
             intent.putExtra("pickingPart", pickingPart)
@@ -100,7 +105,7 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
         } else {
             val intent = Intent(this, ItemActivity::class.java)
             intent.putExtra("isSuccess", true)
-            intent.putExtra("partAddress", pickingPart + " " +  value[0])
+            intent.putExtra("partAddress", pickingPart + " " + value[0])
             intent.putExtra("item", value[1] + " " + value[2])
             startActivity(intent)
         }

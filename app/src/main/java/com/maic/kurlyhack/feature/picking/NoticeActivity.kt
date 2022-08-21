@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.local.NoticeData
 import com.maic.kurlyhack.databinding.ActivityNoticeBinding
+import com.maic.kurlyhack.util.showDrawer
 
 class NoticeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNoticeBinding
@@ -14,6 +15,7 @@ class NoticeActivity : AppCompatActivity() {
         binding = ActivityNoticeBinding.inflate(layoutInflater)
 
         initAdapter()
+        initClickListener()
 
         setContentView(binding.root)
     }
@@ -30,5 +32,15 @@ class NoticeActivity : AppCompatActivity() {
             )
         )
         noticeAdapter.notifyDataSetChanged()
+    }
+
+    private fun initClickListener() {
+        binding.ivNoticeBack.setOnClickListener {
+            finish()
+        }
+
+        binding.ivNoticeMenu.setOnClickListener {
+            showDrawer(binding.drawerLayout, binding.navView)
+        }
     }
 }

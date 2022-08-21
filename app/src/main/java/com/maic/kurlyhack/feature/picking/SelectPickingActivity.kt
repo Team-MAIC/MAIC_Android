@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.local.PartData
 import com.maic.kurlyhack.databinding.ActivitySelectPickingBinding
 import com.maic.kurlyhack.feature.OnItemClick
+import com.maic.kurlyhack.util.showDrawer
 
 class SelectPickingActivity : AppCompatActivity(), OnItemClick {
     private lateinit var binding: ActivitySelectPickingBinding
@@ -39,6 +40,9 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
     private fun initClickListener() {
         binding.ivSelectPickingNotice.setOnClickListener {
             startActivity(Intent(this@SelectPickingActivity, NoticeActivity::class.java))
+        }
+        binding.ivSelectPickingMenu.setOnClickListener {
+            showDrawer(binding.drawerLayout, binding.navView)
         }
     }
 

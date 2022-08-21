@@ -1,12 +1,9 @@
 package com.maic.kurlyhack.feature.das
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.databinding.ActivityCountErrorBinding
-import com.maic.kurlyhack.feature.MainActivity
-
-
-
+import com.maic.kurlyhack.util.showDrawer
 
 class CountErrorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCountErrorBinding
@@ -29,6 +26,14 @@ class CountErrorActivity : AppCompatActivity() {
     private fun initBtnClickListener() {
         binding.btnCountTransmit.setOnClickListener {
             // TODO: api 연결
+            finish()
+        }
+
+        binding.ivCountErrorMenu.setOnClickListener {
+            showDrawer(binding.drawerLayout, binding.navView)
+        }
+
+        binding.ivCountErrorBack.setOnClickListener {
             finish()
         }
     }

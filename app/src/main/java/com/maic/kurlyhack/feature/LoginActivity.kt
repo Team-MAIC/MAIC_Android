@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.maic.kurlyhack.databinding.ActivityLoginBinding
+import com.maic.kurlyhack.util.showDrawer
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -12,10 +13,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         activeBtn()
         clickBtnListener()
+
+        setContentView(binding.root)
     }
 
     private fun activeBtn() {
@@ -30,6 +32,10 @@ class LoginActivity : AppCompatActivity() {
         binding.btnMainStart.setOnClickListener {
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
+        }
+
+        binding.ivMainMenu.setOnClickListener {
+            showDrawer(binding.drawerLayout, binding.navView)
         }
     }
 }
