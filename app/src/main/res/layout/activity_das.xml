@@ -98,7 +98,7 @@
             android:id="@+id/iv_das_green"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@+id/iv_das_red"
             app:layout_constraintStart_toStartOf="@+id/iv_das_red"
             app:layout_constraintTop_toBottomOf="@+id/iv_das_red"
