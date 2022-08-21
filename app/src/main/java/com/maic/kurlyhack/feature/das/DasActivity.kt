@@ -2,15 +2,12 @@ package com.maic.kurlyhack.feature.das
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
-import com.maic.kurlyhack.R
 import com.maic.kurlyhack.data.local.DasData
 import com.maic.kurlyhack.databinding.ActivityDasBinding
 import com.maic.kurlyhack.feature.OnItemClick
-import com.maic.kurlyhack.feature.picking.PickingBarCodeActivity
+import com.maic.kurlyhack.util.showDrawer
 
 class DasActivity : AppCompatActivity(), OnItemClick {
     private lateinit var binding: ActivityDasBinding
@@ -54,6 +51,10 @@ class DasActivity : AppCompatActivity(), OnItemClick {
 
         binding.btnDasBarcode.setOnClickListener {
             startActivity(Intent(this@DasActivity, DasBarcodeActivity::class.java))
+        }
+
+        binding.ivDasMenu.setOnClickListener {
+            showDrawer(binding.drawerLayout, binding.navView)
         }
     }
 

@@ -12,6 +12,7 @@ import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.maic.kurlyhack.R
 import com.maic.kurlyhack.databinding.ActivityPickingBarcodeBinding
 import com.maic.kurlyhack.feature.OnItemClick
+import com.maic.kurlyhack.util.showDrawer
 
 class PickingBarCodeActivity : AppCompatActivity(), OnItemClick {
     private lateinit var barcodeScannerView: DecoratedBarcodeView
@@ -26,6 +27,7 @@ class PickingBarCodeActivity : AppCompatActivity(), OnItemClick {
 
         getData()
         initDialog()
+        initBtnClickListener()
 
         setContentView(binding.root)
 
@@ -63,6 +65,16 @@ class PickingBarCodeActivity : AppCompatActivity(), OnItemClick {
         binding.btnPickingBarcodeStart.setOnClickListener {
             val dialog = BarcodeDialog(this)
             dialog.showDialog(this)
+        }
+    }
+
+    private fun initBtnClickListener() {
+        binding.ivPickingBarcodeBack.setOnClickListener {
+            finish()
+        }
+
+        binding.ivPickingBarcodeMenu.setOnClickListener {
+            showDrawer(binding.drawerLayout, binding.navView)
         }
     }
 

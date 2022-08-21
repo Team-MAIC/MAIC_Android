@@ -1,187 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.picking.PickingActivity">
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_picking_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/picking_title"
-        android:background="@color/main_purple"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:paddingTop="24dp"
-        android:paddingBottom="24dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_picking_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_picking_title"
-        app:layout_constraintEnd_toEndOf="@+id/tv_picking_title"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_menu" />
-
-    <ImageView
-        android:id="@+id/iv_picking_notice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_picking_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_notice" />
-
-    <ImageView
-        android:id="@+id/iv_count_picking_help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:paddingStart="4dp"
-        android:paddingTop="4dp"
-        android:paddingEnd="4dp"
-        android:paddingBottom="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_picking_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_picking_title"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_question" />
-
-    <TextView
-        android:id="@+id/tv_picking_part"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/picking_part"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_picking_title" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_picking_part">
-
-        <ImageView
-            android:id="@+id/iv_picking_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/selector_picking_status" />
-
-        <TextView
-            android:id="@+id/tv_picking_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/picking_status_all"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <ImageView
-            android:id="@+id/iv_picking_ongoing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/selector_picking_status" />
-
-        <TextView
-            android:id="@+id/tv_picking_ongoing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/picking_status_ongoing"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <ImageView
-            android:id="@+id/iv_picking_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/selector_picking_status" />
-
-        <TextView
-            android:id="@+id/tv_picking_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/picking_status_complete"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <ImageView
-            android:id="@+id/iv_picking_complete_mine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/selector_picking_status" />
-
-        <TextView
-            android:id="@+id/tv_picking_complete_mine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="@string/picking_status_complete_mine"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-    </LinearLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/ns_picking"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="1.0">
+        android:layout_height="match_parent"
+        tools:context=".feature.picking.PickingActivity">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_picking"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="12dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        <TextView
+            android:id="@+id/tv_picking_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/main_purple"
+            android:gravity="center"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:text="@string/picking_title"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_picking_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:paddingStart="4dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_picking_title"
+            app:layout_constraintEnd_toEndOf="@+id/tv_picking_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_menu" />
+
+        <ImageView
+            android:id="@+id/iv_picking_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:paddingStart="4dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_picking_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_notice" />
+
+        <ImageView
+            android:id="@+id/iv_count_picking_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:paddingStart="4dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_picking_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_picking_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_question" />
+
+        <TextView
+            android:id="@+id/tv_picking_part"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/picking_part"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_picking_title"
-            tools:listitem="@layout/item_picking">
+            app:layout_constraintTop_toBottomOf="@+id/tv_picking_title" />
 
-        </androidx.recyclerview.widget.RecyclerView>
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_picking_part">
 
-    </androidx.core.widget.NestedScrollView>
+            <ImageView
+                android:id="@+id/iv_picking_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/selector_picking_status" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_picking_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/picking_status_all"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/iv_picking_ongoing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                app:srcCompat="@drawable/selector_picking_status" />
+
+            <TextView
+                android:id="@+id/tv_picking_ongoing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/picking_status_ongoing"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/iv_picking_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                app:srcCompat="@drawable/selector_picking_status" />
+
+            <TextView
+                android:id="@+id/tv_picking_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/picking_status_complete"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/iv_picking_complete_mine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                app:srcCompat="@drawable/selector_picking_status" />
+
+            <TextView
+                android:id="@+id/tv_picking_complete_mine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/picking_status_complete_mine"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/ns_picking"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintVertical_bias="1.0">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_picking"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="12dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_picking_title"
+                tools:listitem="@layout/item_picking">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/navi_header"
+        app:menu="@menu/navi_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>
