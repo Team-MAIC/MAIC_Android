@@ -16,8 +16,23 @@ class LoginActivity : AppCompatActivity() {
 
         activeBtn()
         clickBtnListener()
+        MyFirebaseMessagingService().getFirebaseToken()
+
+        /** DynamicLink 수신확인 */
+        initDynamicLink()
 
         setContentView(binding.root)
+    }
+
+    /** DynamicLink */
+    private fun initDynamicLink() {
+        val dynamicLinkData = intent.extras
+        if (dynamicLinkData != null) {
+            var dataStr = "DynamicLink 수신받은 값\n"
+            for (key in dynamicLinkData.keySet()) {
+                dataStr += "key: $key / value: ${dynamicLinkData.getString(key)}\n"
+            }
+        }
     }
 
     private fun activeBtn() {
