@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.databinding.ActivityMainBinding
 import com.maic.kurlyhack.feature.das.DasActivity
 import com.maic.kurlyhack.feature.picking.SelectPickingActivity
+import com.maic.kurlyhack.util.showDrawer
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -24,6 +25,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this@MainActivity, SelectPickingActivity::class.java))
             startActivity(Intent(this@MainActivity, DasActivity::class.java))
         }
-// startActivity(Intent(this@MainActivity, DasActivity::class.java))
+
+        binding.ivMainMenu.setOnClickListener {
+            showDrawer(binding.drawerLayout, binding.navView)
+        }
     }
 }

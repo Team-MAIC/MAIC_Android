@@ -13,6 +13,7 @@ import com.maic.kurlyhack.R
 import com.maic.kurlyhack.databinding.ActivityDasBarcodeBinding
 import com.maic.kurlyhack.feature.OnItemClick
 import com.maic.kurlyhack.feature.picking.BarcodeDialog
+import com.maic.kurlyhack.util.showDrawer
 
 class DasBarcodeActivity : AppCompatActivity(), OnItemClick {
     private lateinit var binding: ActivityDasBarcodeBinding
@@ -46,6 +47,14 @@ class DasBarcodeActivity : AppCompatActivity(), OnItemClick {
         binding.btnDasBarcode.setOnClickListener {
             val dialog = BarcodeDialog(this)
             dialog.showDialog(this)
+        }
+
+        binding.ivDasBarcodeBack.setOnClickListener {
+            finish()
+        }
+
+        binding.ivDasBarcodeMenu.setOnClickListener {
+            showDrawer(binding.drawerLayout, binding.navView)
         }
     }
 
