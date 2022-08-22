@@ -21,6 +21,7 @@ class ItemActivity : AppCompatActivity() {
 
     private fun getData() {
         with(binding) {
+            tvItemErrorDes.text = "오류: " + intent.getStringExtra("codeItem")
             if (intent.getBooleanExtra("isSuccess", false)) {
                 tvItemError.visibility = View.INVISIBLE
                 tvItemErrorDes.visibility = View.INVISIBLE
