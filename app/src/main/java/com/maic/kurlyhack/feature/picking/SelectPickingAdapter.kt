@@ -2,6 +2,7 @@ package com.maic.kurlyhack.feature.picking
 
 import android.graphics.Color
 import android.graphics.Typeface
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -16,13 +17,6 @@ class SelectPickingAdapter(private val onItemClick: OnItemClick) : RecyclerView.
         private var isFirst = true
         fun onBind(data: RoundData) {
             binding.tvPart.text = data.roundId.toString() + "회차"
-            if (isFirst) {
-                binding.tvPart.textSize = 19f
-                binding.tvPart.setTypeface(null, Typeface.BOLD)
-                isFirst = false
-            } else {
-                binding.tvPart.setTextColor(Color.LTGRAY)
-            }
         }
     }
 
@@ -35,13 +29,14 @@ class SelectPickingAdapter(private val onItemClick: OnItemClick) : RecyclerView.
         holder.onBind(partList[position])
 
         var roundId = partList[position].roundId
-        if (holder.binding.tvPart.currentTextColor != Color.LTGRAY) {
+        if (position == 0) {
             holder.itemView.setOnClickListener {
-                val partList = ArrayList<String>()
-                partList.add(holder.binding.tvPart.text.toString())
-                partList.add(roundId.toString())
-                onItemClick.onListClick(partList)
+                holder.binding.tvPart.textSize = 19f
+                holder.binding.tvPart.setTypeface(null, Typeface.BOLD)
+                onItemClick.onClick(roundId.toString())
             }
+        }else{
+            holder.binding.tvPart.setTextColor(Color.LTGRAY)
         }
     }
 

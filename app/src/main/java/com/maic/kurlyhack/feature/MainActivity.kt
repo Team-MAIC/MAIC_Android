@@ -2,6 +2,7 @@ package com.maic.kurlyhack.feature
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.databinding.ActivityMainBinding
 import com.maic.kurlyhack.feature.das.DasActivity
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     var workerId = 0
     var isPick = false
+    var area = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         workerId = intent.getIntExtra("workerId", 0)
         isPick = intent.getBooleanExtra("isPick", false)
         binding.tvMainPart.text = intent.getStringExtra("workerPart")
+        area = binding.tvMainPart.text.split(' ')[2]
     }
 
     private fun initClickListener() {
@@ -34,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             if (isPick) {
                 val intent = Intent(this@MainActivity, SelectPickingActivity::class.java)
                 intent.putExtra("workerId", workerId)
+                intent.putExtra("workerArea", area)
                 startActivity(intent)
             } else {
                 startActivity(Intent(this@MainActivity, DasActivity::class.java))

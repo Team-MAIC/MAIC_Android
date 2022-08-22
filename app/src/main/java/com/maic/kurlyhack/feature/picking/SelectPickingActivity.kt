@@ -14,6 +14,7 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
     private lateinit var binding: ActivitySelectPickingBinding
     private lateinit var selectPickingAdapter: SelectPickingAdapter
     var workerId = 0
+    var area = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,8 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
 
     private fun getData() {
         workerId = intent.getIntExtra("workerId", 0)
+        area = intent.getStringExtra("workerArea").toString()
+        Log.d("###", area)
     }
 
     private fun initAdapter() {
@@ -35,7 +38,6 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
         KurlyClient.pickingService.getRoundsData(
             workerId
         ).callback.onSuccess {
-            Log.d("###", "실행")
             selectPickingAdapter = SelectPickingAdapter(this)
 
             binding.rvSelectPickingPart.adapter = selectPickingAdapter
@@ -58,13 +60,13 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
     }
 
     override fun onClick(value: String) {
+        val intent = Intent(this, PickingActivity::class.java)
+        intent.putExtra("roundId", value.toInt())
+        intent.putExtra("area", area)
+        intent.putExtra("workerId", workerId)
+        startActivity(intent)
     }
 
     override fun onListClick(value: ArrayList<String>) {
-        val intent = Intent(this, PickingActivity::class.java)
-        intent.putExtra("pickingPart", value[0])
-        intent.putExtra("roundId", value[1])
-        intent.putExtra("workerId", workerId)
-        startActivity(intent)
     }
 }
