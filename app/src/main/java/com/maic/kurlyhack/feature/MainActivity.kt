@@ -32,7 +32,9 @@ class MainActivity : AppCompatActivity() {
         // TODO: 작업내용이 피킹인지 다스인지 확인하고 화면 연결
         binding.btnMainStart.setOnClickListener {
             if (isPick) {
-                startActivity(Intent(this@MainActivity, SelectPickingActivity::class.java))
+                val intent = Intent(this@MainActivity, SelectPickingActivity::class.java)
+                intent.putExtra("workerId", workerId)
+                startActivity(intent)
             } else {
                 startActivity(Intent(this@MainActivity, DasActivity::class.java))
             }

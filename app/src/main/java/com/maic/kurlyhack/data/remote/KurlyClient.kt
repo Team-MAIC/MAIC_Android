@@ -14,6 +14,10 @@ object KurlyClient {
         provideService(UserService::class.java)
     }
 
+    val pickingService: PickingService by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        provideService(PickingService::class.java)
+    }
+
     private fun <T> provideService(clazz: Class<T>): T = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())

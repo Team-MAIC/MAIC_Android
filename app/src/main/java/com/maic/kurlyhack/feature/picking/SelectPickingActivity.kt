@@ -11,15 +11,21 @@ import com.maic.kurlyhack.util.showDrawer
 class SelectPickingActivity : AppCompatActivity(), OnItemClick {
     private lateinit var binding: ActivitySelectPickingBinding
     private lateinit var selectPickingAdapter: SelectPickingAdapter
+    var workerId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectPickingBinding.inflate(layoutInflater)
 
+        getData()
         initAdapter()
         initClickListener()
 
         setContentView(binding.root)
+    }
+
+    private fun getData() {
+        workerId = intent.getIntExtra("workerId", 0)
     }
 
     private fun initAdapter() {
@@ -49,6 +55,7 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
     override fun onClick(value: String) {
         val intent = Intent(this, PickingActivity::class.java)
         intent.putExtra("pickingPart", value)
+        intent.putExtra("workerId", workerId)
         startActivity(intent)
     }
 
