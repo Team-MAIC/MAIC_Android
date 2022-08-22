@@ -13,4 +13,16 @@ interface PickingService {
     fun getRoundsData(
         @Header("worker-id") worker_id: Int
     ): Call<ResponseWrapper<ResponseRoundData>>
+
+    @GET("pick/todos")
+    fun getPickingData(
+        @Header("worker-id") worker_id: Int,
+        @Query("roundId") roundId: Int,
+        @Query("area") area: String
+    ): Call<ResponseWrapper<ResponsePickingData>>
+
+    @POST("pick/todos/subscribe")
+    fun postSubscribe(
+        @Body body: RequestSubscribe
+    ): Call<ResponseWrapper<ResponseBase>>
 }
