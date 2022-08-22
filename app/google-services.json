@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "352482826224",
+    "project_id": "kulry-hack-fcm",
+    "storage_bucket": "kulry-hack-fcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352482826224:android:4ad523ab50499be4926f35",
+        "android_client_info": {
+          "package_name": "com.maic.kurlyhack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352482826224-6kvovun7oktjer5u6ih7e9gic7u987po.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQZz6lN35oKU3raPBE6TNiW1M7-Qx4oNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352482826224-6kvovun7oktjer5u6ih7e9gic7u987po.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

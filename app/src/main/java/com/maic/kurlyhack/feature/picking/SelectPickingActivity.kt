@@ -2,39 +2,49 @@ package com.maic.kurlyhack.feature.picking
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.maic.kurlyhack.data.local.PartData
+import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.databinding.ActivitySelectPickingBinding
 import com.maic.kurlyhack.feature.OnItemClick
+import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
 
 class SelectPickingActivity : AppCompatActivity(), OnItemClick {
     private lateinit var binding: ActivitySelectPickingBinding
     private lateinit var selectPickingAdapter: SelectPickingAdapter
+    var workerId = 0
+    var area = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectPickingBinding.inflate(layoutInflater)
 
+        getData()
         initAdapter()
         initClickListener()
 
         setContentView(binding.root)
     }
 
+    private fun getData() {
+        workerId = intent.getIntExtra("workerId", 0)
+        area = intent.getStringExtra("workerArea").toString()
+        Log.d("###", area)
+    }
+
     private fun initAdapter() {
-        selectPickingAdapter = SelectPickingAdapter(this)
 
-        binding.rvSelectPickingPart.adapter = selectPickingAdapter
+        KurlyClient.pickingService.getRoundsData(
+            workerId
+        ).callback.onSuccess {
+            selectPickingAdapter = SelectPickingAdapter(this)
 
-        selectPickingAdapter.partList.addAll(
-            listOf(
-                PartData("1회차", true),
-                PartData("2회차", false),
-                PartData("3회차", false)
-            )
-        )
-        selectPickingAdapter.notifyDataSetChanged()
+            binding.rvSelectPickingPart.adapter = selectPickingAdapter
+
+            selectPickingAdapter.partList.addAll(it.data!!.rounds)
+            selectPickingAdapter.notifyDataSetChanged()
+        }.enqueue()
     }
 
     private fun initClickListener() {
@@ -44,11 +54,16 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
         binding.ivSelectPickingMenu.setOnClickListener {
             showDrawer(binding.drawerLayout, binding.navView)
         }
+        binding.ivSelectPickingRefresh.setOnClickListener {
+            initAdapter()
+        }
     }
 
     override fun onClick(value: String) {
         val intent = Intent(this, PickingActivity::class.java)
-        intent.putExtra("pickingPart", value)
+        intent.putExtra("roundId", value.toInt())
+        intent.putExtra("area", area)
+        intent.putExtra("workerId", workerId)
         startActivity(intent)
     }
 
