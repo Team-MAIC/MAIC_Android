@@ -14,6 +14,9 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.maic.kurlyhack.R
+import com.maic.kurlyhack.data.remote.KurlyClient
+import com.maic.kurlyhack.data.remote.request.RequestDeviceToken
+import com.maic.kurlyhack.util.callback
 
 // class MyFirebaseMessagingService : FirebaseMessagingService() {
 //    override fun onNewToken(token: String) {
@@ -126,29 +129,18 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager.notify(uniId, notificationBuilder.build())
     }
 
-    /*
-    /** Token 가져오기 */
-    fun getFirebaseToken(tv: TextView) {
-        FirebaseMessaging.getInstance().token.addOnSuccessListener {
-            Log.d(TAG, "token=$it")
-            tv.text = it
-        }
-
-//        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-//                if (!task.isSuccessful) {
-//                    Log.d(TAG, "Fetching FCM registration token failed ${task.exception}")
-//                    return@OnCompleteListener
-//                }
-//                var deviceToken = task.result
-//                Log.e(TAG, "token=${deviceToken}")
-//            })
-    }
-     */
-
     // 원본
-    fun getFirebaseToken() {
+    fun getFirebaseToken(int: Int) {
         FirebaseMessaging.getInstance().token.addOnSuccessListener {
-            Log.d(TAG, "token=$it")
+            val requestDeviceToken = RequestDeviceToken(
+                deviceToken = it
+            )
+            KurlyClient.userService.putDeviceToken(
+                int,
+                requestDeviceToken
+            ).callback.onSuccess {
+                Log.d("###", requestDeviceToken.toString() + "추가")
+            }.enqueue()
         }
 
 //        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->

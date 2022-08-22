@@ -19,7 +19,6 @@ class LoginActivity : AppCompatActivity() {
 
         activeBtn()
         clickBtnListener()
-        MyFirebaseMessagingService().getFirebaseToken()
 
         /** DynamicLink 수신확인 */
         initDynamicLink()
@@ -61,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
             binding.etUserNumber.text.toString().toInt()
         ).callback.onSuccess {
             if (it.data != null) {
+                MyFirebaseMessagingService().getFirebaseToken(it.data.workerId)
                 val myWork: String
                 val myPart: String
                 val isPick: Boolean
