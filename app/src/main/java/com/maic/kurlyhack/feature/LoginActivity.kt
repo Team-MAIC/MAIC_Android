@@ -19,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
 
         activeBtn()
         clickBtnListener()
+        //MyFirebaseMessagingService().showToken(binding.etUserNumber)
 
         /** DynamicLink 수신확인 */
         initDynamicLink()

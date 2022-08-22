@@ -8,6 +8,7 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
+import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.firebase.messaging.FirebaseMessaging
@@ -151,6 +152,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //                var deviceToken = task.result
 //                Log.e(TAG, "token=${deviceToken}")
 //            })
+    }
+
+    fun showToken(tv: TextView) {
+        FirebaseMessaging.getInstance().token.addOnSuccessListener {
+            tv.text = it
+        }
     }
 }
 
