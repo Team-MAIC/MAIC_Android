@@ -89,7 +89,9 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
 
     private fun initClickListener() {
         binding.ivPickingNotice.setOnClickListener {
-            startActivity(Intent(this@PickingActivity, NoticeActivity::class.java))
+            val intent = Intent(this@PickingActivity, NoticeActivity::class.java)
+            intent.putExtra("workerId", workerId)
+            startActivity(intent)
         }
 
         binding.ivPickingMenu.setOnClickListener {

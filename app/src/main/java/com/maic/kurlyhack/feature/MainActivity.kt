@@ -40,11 +40,14 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("workerId", workerId)
                 intent.putExtra("workerArea", area)
                 startActivity(intent)
+                finish()
             } else {
                 val intent = Intent(this@MainActivity, DasActivity::class.java)
                 intent.putExtra("area", area)
                 intent.putExtra("centerId", centerId)
+                intent.putExtra("workerId", workerId)
                 startActivity(intent)
+                finish()
             }
         }
 

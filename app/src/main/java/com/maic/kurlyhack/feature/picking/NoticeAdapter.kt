@@ -3,18 +3,24 @@ package com.maic.kurlyhack.feature.picking
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.maic.kurlyhack.data.local.NoticeData
+import com.maic.kurlyhack.data.remote.response.MessageData
 import com.maic.kurlyhack.databinding.ItemNoticeBinding
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
-    val noticeList = mutableListOf<NoticeData>()
+    val noticeList = mutableListOf<MessageData>()
 
     class NoticeViewHolder(val binding: ItemNoticeBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: NoticeData) {
+        fun onBind(data: MessageData) {
             with(binding) {
-                tvNoticePartAddress.text = data.partAddress
-                tvNotice.text = data.notice
-                tvNoticeTime.text = data.time
+                tvNoticePartAddress.text = data.fullLocation
+                tvNotice.text = data.content
+                val formatter: DateFormat = SimpleDateFormat("HH:mm:ss", Locale.KOREA)
+                formatter.timeZone = TimeZone.getTimeZone("Asia/Seoul")
+                val text: String = formatter.format(data.time)
+                tvNoticeTime.text = text
             }
         }
     }
