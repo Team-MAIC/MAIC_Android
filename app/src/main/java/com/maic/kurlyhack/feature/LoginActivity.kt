@@ -1,5 +1,7 @@
 package com.maic.kurlyhack.feature
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -21,6 +23,13 @@ class LoginActivity : AppCompatActivity() {
         clickBtnListener()
         //MyFirebaseMessagingService().showToken(binding.etUserNumber)
 
+        /** FCM설정, Token값 가져오기 */
+        MyFirebaseMessagingService().getFirebaseToken(binding.etUserNumber)
+        // MyFirebaseMessagingService().getFirebaseToken()
+        val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label", binding.etUserNumber.text)
+        clipboard.setPrimaryClip(clip)
+
         /** DynamicLink 수신확인 */
         initDynamicLink()
 
@@ -34,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
             var dataStr = "DynamicLink 수신받은 값\n"
             for (key in dynamicLinkData.keySet()) {
                 dataStr += "key: $key / value: ${dynamicLinkData.getString(key)}\n"
+                //binding.tvMainTitle.text = dataStr
             }
         }
     }
@@ -61,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
             binding.etUserNumber.text.toString().toInt()
         ).callback.onSuccess {
             if (it.data != null) {
-                MyFirebaseMessagingService().getFirebaseToken(it.data.workerId)
+                //MyFirebaseMessagingService().getFirebaseToken(it.data.workerId)
                 val myWork: String
                 val myPart: String
                 val isPick: Boolean
