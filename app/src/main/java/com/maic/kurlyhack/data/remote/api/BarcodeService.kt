@@ -1,7 +1,6 @@
 package com.maic.kurlyhack.data.remote.api
 
-import com.maic.kurlyhack.data.remote.response.ResponseBarcodeData
-import com.maic.kurlyhack.data.remote.response.ResponseWrapper
+import com.maic.kurlyhack.data.remote.response.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -19,5 +18,16 @@ interface BarcodeService {
     fun putPickData(
         @Header("worker-id") workerId: Int,
         @Path("pickTodoId") pickTodoId: Int
-    ): Call<ResponseWrapper<ResponseBarcodeData>>
+    ): Call<ResponseWrapper<ResponseBase>>
+
+    @GET("/products/barcode/{barcode}")
+    fun getDasCodeData(
+        @Path("barcode") barcode: String
+    ): Call<ResponseWrapper<ResponseDasCodeData>>
+
+    @PUT("das/todos/{roundId}/products/{productId}")
+    fun putDasData(
+        @Path("roundId") roundId: Int,
+        @Path("productId") productId: Int
+    ): Call<ResponseWrapper<ResponseBase>>
 }
