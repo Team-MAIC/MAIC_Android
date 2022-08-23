@@ -81,6 +81,7 @@ class LoginActivity : AppCompatActivity() {
                 intent.putExtra("workerId", it.data.workerId)
                 intent.putExtra("workerPart", myWork + myPart)
                 intent.putExtra("isPick", isPick)
+                intent.putExtra("centerId", it.data.centerId)
                 startActivity(intent)
                 finish()
             } else {

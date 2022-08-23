@@ -5,22 +5,39 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.local.DasData
+import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.databinding.ActivityDasBinding
 import com.maic.kurlyhack.feature.OnItemClick
+import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
 
 class DasActivity : AppCompatActivity(), OnItemClick {
     private lateinit var binding: ActivityDasBinding
     private lateinit var dasAdapter: DasAdapter
+    var passage = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDasBinding.inflate(layoutInflater)
 
+        getData()
         initAdapter()
         initBtnListener()
 
         setContentView(binding.root)
+    }
+
+    private fun getData() {
+        passage = intent.getStringExtra("area")!!.toInt()
+        KurlyClient.dasService.getBoxData(
+            intent.getIntExtra("centerId", 0),
+            passage
+        ).callback.onSuccess {
+            binding.tvDasDetailPart.text = passage.toString() + "번 통로 : " + intent.getIntExtra("centerId", 0) + "회차"
+            if (it.code == 4001) {
+                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+            }
+        }.enqueue()
     }
 
     private fun initAdapter() {
