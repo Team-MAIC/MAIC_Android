@@ -1,6 +1,7 @@
 package com.maic.kurlyhack.data.remote
 
 import com.maic.kurlyhack.data.remote.api.BarcodeService
+import com.maic.kurlyhack.data.remote.api.DasService
 import com.maic.kurlyhack.data.remote.api.PickingService
 import com.maic.kurlyhack.data.remote.api.UserService
 import okhttp3.OkHttpClient
@@ -21,6 +22,10 @@ object KurlyClient {
 
     val barcodeService: BarcodeService by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         provideService(BarcodeService::class.java)
+    }
+
+    val dasService: DasService by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        provideService(DasService::class.java)
     }
 
     private fun <T> provideService(clazz: Class<T>): T = Retrofit.Builder()
