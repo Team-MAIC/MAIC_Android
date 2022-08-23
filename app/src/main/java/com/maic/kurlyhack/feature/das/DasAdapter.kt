@@ -1,22 +1,21 @@
 package com.maic.kurlyhack.feature.das
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.maic.kurlyhack.R
 import com.maic.kurlyhack.data.remote.response.BasketItemData
 import com.maic.kurlyhack.databinding.ItemDasBinding
+import com.maic.kurlyhack.feature.OnItemClick
 
-class DasAdapter : RecyclerView.Adapter<DasAdapter.DasViewHolder>() {
+class DasAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapter<DasAdapter.DasViewHolder>() {
     val dasList = mutableListOf<BasketItemData>()
 
     class DasViewHolder(val binding: ItemDasBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: BasketItemData) {
             with(binding) {
-                tvDasBox.text = "BOX" + data.basketNum
+                tvDasBox.text = "BOX " + data.basketNum
                 if (data.todo == null) {
                     ivDasColor.setImageResource(R.drawable.oval_fill_white)
                 } else {
@@ -47,11 +46,20 @@ class DasAdapter : RecyclerView.Adapter<DasAdapter.DasViewHolder>() {
         holder.onBind(dasList[position])
 
         holder.itemView.setOnClickListener {
+            val item = dasList[position].todo
+            val infoList = ArrayList<String>()
+
             if (holder.binding.ivDasColor.tag == R.drawable.oval_fill_black) {
-                val intent = Intent(it.context, CountErrorActivity::class.java)
-                intent.putExtra("addressBox", dasList[position].basketNum)
-                intent.putExtra("Item", dasList[position].todo.productName)
-                it.context.startActivity(intent)
+                if (item.currentAmount < item.productAmount) {
+                    val count = item.productAmount - item.currentAmount
+                    infoList.add(dasList[position].basketNum.toString())
+                    infoList.add(item.productName)
+                    infoList.add(count.toString())
+                    onItemClick.onListClick(infoList)
+                } else {
+                    var count = item.productAmount - item.currentAmount
+                    Toast.makeText(holder.itemView.context, item.productName + " " + count + "개 초과 예상", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

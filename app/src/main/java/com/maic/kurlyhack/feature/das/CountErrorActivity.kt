@@ -20,18 +20,22 @@ class CountErrorActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        binding.tvCountErrorPart.text = intent.getStringExtra("addressBox")
-        binding.tvCountErrorItem.text = intent.getStringExtra("Item")
+        var info = intent.getStringArrayListExtra("info")
+        var passage = intent.getIntExtra("passage", 0)
+        binding.tvCountErrorPart.text = passage.toString() + "번 통로 " + "BOX " + info!![0]
+        binding.tvCountErrorItem.text = info[1]
+        binding.etCountError.hint = info[2]
+        binding.tvCountErrorDes.text = "예상 부족 수량 : " + info[2] + "개"
     }
 
     private fun initBtnClickListener() {
         binding.btnCountTransmit.setOnClickListener {
             // TODO: api 연결
             val count = binding.etCountError.text.toString()
-            if(count.isNotEmpty()) {
+            if (count.isNotEmpty()) {
                 Toast.makeText(this, count + "개 전송", Toast.LENGTH_SHORT).show()
                 finish()
-            }else {
+            } else {
                 Toast.makeText(this, "수량을 입력하세요.", Toast.LENGTH_SHORT).show()
             }
         }

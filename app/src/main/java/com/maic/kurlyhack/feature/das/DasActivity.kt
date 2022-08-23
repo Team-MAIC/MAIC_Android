@@ -53,7 +53,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
     }
 
     private fun initAdapter(i: Int) {
-        dasAdapter = DasAdapter()
+        dasAdapter = DasAdapter(this)
         binding.rvDas.adapter = dasAdapter
         var resultList = mutableListOf<BasketItemData>()
 
@@ -203,5 +203,9 @@ class DasActivity : AppCompatActivity(), OnItemClick {
     }
 
     override fun onListClick(value: ArrayList<String>) {
+        val intent = Intent(this, CountErrorActivity::class.java)
+        intent.putExtra("info", value)
+        intent.putExtra("passage", passage)
+        startActivity(intent)
     }
 }
