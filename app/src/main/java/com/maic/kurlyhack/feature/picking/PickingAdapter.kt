@@ -1,6 +1,7 @@
 package com.maic.kurlyhack.feature.picking
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -40,17 +41,19 @@ class PickingAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapte
             infoList.add(holder.binding.tvPickingCount.text.toString())
 
             holder.binding.ivPickingBarcode.setOnClickListener {
-                infoList.add("code")
-                infoList.add(pickingList[position].productId.toString())
-                infoList.add(pickingList[position].pickTodoId.toString())
+                infoList.add(3,"code")
+                infoList.add(4, pickingList[position].productId.toString())
+                infoList.add(5, pickingList[position].pickTodoId.toString())
                 onItemClick.onListClick(infoList)
             }
             holder.binding.tvPickingName.setOnClickListener {
-                infoList.add("list")
+                infoList.add(3, "list")
+                infoList.add(4, pickingList[position].productThumbnail)
                 onItemClick.onListClick(infoList)
             }
             holder.binding.tvPickingAddress.setOnClickListener {
-                infoList.add("list")
+                infoList.add(3, "list")
+                infoList.add(4, pickingList[position].productThumbnail)
                 onItemClick.onListClick(infoList)
             }
         }

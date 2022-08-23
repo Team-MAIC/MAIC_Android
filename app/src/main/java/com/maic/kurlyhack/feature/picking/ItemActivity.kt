@@ -3,6 +3,7 @@ package com.maic.kurlyhack.feature.picking
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.maic.kurlyhack.databinding.ActivityItemBinding
 import com.maic.kurlyhack.util.showDrawer
 
@@ -28,6 +29,7 @@ class ItemActivity : AppCompatActivity() {
             }
             tvPartAddress.text = intent.getStringExtra("partAddress")
             tvItemName.text = intent.getStringExtra("item")
+            Glide.with(this@ItemActivity).load("https://img.project-maic.com/product/" + intent.getStringExtra("picture")).into(binding.ivItem)
         }
     }
 

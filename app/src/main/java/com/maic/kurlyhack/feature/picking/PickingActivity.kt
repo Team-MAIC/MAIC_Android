@@ -143,7 +143,7 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
     @SuppressLint("CheckResult")
     private fun connectWebSocket() {
 
-        val url = "ws://192.168.100.33:8080/ws/websocket" // 소켓에 연결하는 엔드포인트가 /socket일때 다음과 같음
+        val url = "wss://project-maic.com/wss/websocket" // 소켓에 연결하는 엔드포인트가 /socket일때 다음과 같음
         val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
 
         stompClient.lifecycle().subscribe { lifecycleEvent ->
@@ -224,6 +224,7 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
             intent.putExtra("isSuccess", true)
             intent.putExtra("partAddress", roundId.toString() + "회차 " + value[0])
             intent.putExtra("item", value[1] + " " + value[2])
+            intent.putExtra("picture", value[4])
             startActivity(intent)
         }
     }

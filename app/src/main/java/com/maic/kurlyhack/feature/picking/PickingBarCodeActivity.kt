@@ -88,8 +88,6 @@ class PickingBarCodeActivity : AppCompatActivity(), OnItemClick {
 
     private fun moveActivity(code: String) {
         // TODO: 성공 실패 여부 - 받은 거랑 리스트 클릭 내용이랑 비교 / PickingActiivty로 돌아가거나 ItemActivity(오류)로 이동
-        Log.d("###55", code)
-        Log.d("###5", productId.toString())
         KurlyClient.barcodeService.getBarcodeData(
             productId.toString(),
             code
@@ -114,6 +112,7 @@ class PickingBarCodeActivity : AppCompatActivity(), OnItemClick {
                     intent.putExtra("codeItem", it.data?.compare?.productName)
                     intent.putExtra("partAddress", mPartAddress)
                     intent.putExtra("item", mItem)
+                    intent.putExtra("picture", it.data?.product?.productThumbnail)
                     startActivity(intent)
                 }
             }
