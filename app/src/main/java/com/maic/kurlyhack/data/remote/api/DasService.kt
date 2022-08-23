@@ -9,8 +9,15 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface DasService {
+    @GET("das/todos/refresh")
+    fun getBoxData(
+        @Query("centerId") centerId: Int,
+        @Query("passage") passage: Int
+    ): Call<ResponseWrapper<ResponseBoxData>>
+
     @POST("das/todos/subscribe")
     fun postDasSubscribe(
         @Body body: RequestDasSubscribe
     ): Call<ResponseWrapper<ResponseBase>>
+
 }
