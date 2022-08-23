@@ -6,10 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.maic.kurlyhack.data.local.DasData
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.data.remote.request.RequestDasSubscribe
-import com.maic.kurlyhack.data.remote.request.RequestSubscribe
+import com.maic.kurlyhack.data.remote.response.BasketItemData
 import com.maic.kurlyhack.databinding.ActivityDasBinding
 import com.maic.kurlyhack.feature.OnItemClick
 import com.maic.kurlyhack.util.callback
@@ -22,13 +21,14 @@ class DasActivity : AppCompatActivity(), OnItemClick {
     private lateinit var dasAdapter: DasAdapter
     var passage = 0
     var centerId = 0
+    var roundId = 0
+    var filterId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDasBinding.inflate(layoutInflater)
 
         getData()
-        initAdapter()
         initBtnListener()
         connectWebSocket()
 
@@ -45,28 +45,87 @@ class DasActivity : AppCompatActivity(), OnItemClick {
             binding.tvDasDetailPart.text = passage.toString() + "번 통로 : " + centerId + "회차"
             if (it.code == 4001) {
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+            } else {
+                roundId = it.data!!.roundId
+                initAdapter(0)
             }
         }.enqueue()
     }
 
-    private fun initAdapter() {
+    private fun initAdapter(i: Int) {
         dasAdapter = DasAdapter()
-
         binding.rvDas.adapter = dasAdapter
+        var resultList = mutableListOf<BasketItemData>()
 
-        dasAdapter.dasList.addAll(
-            listOf(
-                DasData("하양", "BOX2", "", "0g", "(0개)"),
-                DasData("검정", "BOX3", "수박", "10g", "(1개)"),
-                DasData("빨강", "BOX1", "수박", "12g", "(1개)"),
-                DasData("노랑", "BOX4", "사과", "25g", "(6개)"),
-                DasData("초록", "BOX5", "치약", "3g", "(1개)"),
-                DasData("하양", "BOX6", "", "0g", "(0개)"),
-                DasData("하양", "BOX7", "", "0g", "(0개)"),
-                DasData("파랑", "BOX8", "멜론", "14g", "(2개)")
-            )
-        )
-        dasAdapter.notifyDataSetChanged()
+        KurlyClient.dasService.getDasData(
+            roundId
+        ).callback.onSuccess { it ->
+            with(binding) {
+                for (i in 0 until it.data!!.colors.size) {
+                    when (it.data.colors[i].color) {
+                        "RED" -> tvDasRed.text = it.data.colors[i].productName
+                        "YELLOW" -> tvDasYellow.text = it.data.colors[i].productName
+                        "GREEN" -> tvDasGreen.text = it.data.colors[i].productName
+                        "BLUE" -> tvDasBlue.text = it.data.colors[i].productName
+                    }
+                }
+            }
+            when (i) {
+                0 -> {
+                    resultList = it.data!!.baskets
+                }
+                1 -> {
+                    resultList = it.data!!.baskets.filter {
+                        it.todo != null
+                    }.toMutableList()
+                }
+                2 -> {
+                    resultList = it.data!!.baskets.filter {
+                        it.todo != null
+                    }.toMutableList().filter {
+                        it.todo.color == "RED"
+                    }.toMutableList().filter {
+                        it.todo.status == "READY"
+                    }.toMutableList()
+                }
+                3 -> {
+                    resultList = it.data!!.baskets.filter {
+                        it.todo != null
+                    }.toMutableList().filter {
+                        it.todo.color == "YELLOW"
+                    }.toMutableList().filter {
+                        it.todo.status == "READY"
+                    }.toMutableList()
+                }
+                4 -> {
+                    resultList = it.data!!.baskets.filter {
+                        it.todo != null
+                    }.toMutableList().filter {
+                        it.todo.color == "GREEN"
+                    }.toMutableList().filter {
+                        it.todo.status == "READY"
+                    }.toMutableList()
+                }
+                5 -> {
+                    resultList = it.data!!.baskets.filter {
+                        it.todo != null
+                    }.toMutableList().filter {
+                        it.todo.color == "BLUE"
+                    }.toMutableList().filter {
+                        it.todo.status == "READY"
+                    }.toMutableList()
+                }
+                6 -> {
+                    resultList = it.data!!.baskets.filter {
+                        it.todo != null
+                    }.toMutableList().filter {
+                        it.todo.status == "WRONG"
+                    }.toMutableList()
+                }
+            }
+            dasAdapter.dasList.addAll(resultList)
+            dasAdapter.notifyDataSetChanged()
+        }.enqueue()
     }
 
     private fun initBtnListener() {
@@ -125,14 +184,22 @@ class DasActivity : AppCompatActivity(), OnItemClick {
             .subscribe {
                 runOnUiThread {
                     Log.d("###", "성공")
-                    //initAdapter(mCategory)
+                    // initAdapter(mCategory)
                 }
             }
     }
 
     override fun onClick(value: String) {
-        // TODO: value값으로
-        Toast.makeText(this, "$value 눌림", Toast.LENGTH_SHORT).show()
+        when (value) {
+            "ALL" -> filterId = 0
+            "ONGOING" -> filterId = 1
+            "RED" -> filterId = 2
+            "YELLOW" -> filterId = 3
+            "GREEN" -> filterId = 4
+            "BLUE" -> filterId = 5
+            "BLACK" -> filterId = 6
+        }
+        initAdapter(filterId)
     }
 
     override fun onListClick(value: ArrayList<String>) {

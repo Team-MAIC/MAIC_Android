@@ -20,4 +20,8 @@ interface DasService {
         @Body body: RequestDasSubscribe
     ): Call<ResponseWrapper<ResponseBase>>
 
+    @GET("das/todos/{roundId}")
+    fun getDasData(
+        @Path("roundId") roundId: Int
+    ): Call<ResponseWrapper<ResponseDasData>>
 }

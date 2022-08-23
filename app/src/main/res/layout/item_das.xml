@@ -24,9 +24,8 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/das_box"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_das_color"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,36 +36,32 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        android:text="@string/picking_name"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_das_weight"
-        app:layout_constraintStart_toEndOf="@+id/tv_das_box"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_das_weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@string/das_weight"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_das_box"
         app:layout_constraintEnd_toStartOf="@+id/tv_das_count"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47" />
+        app:layout_constraintStart_toEndOf="@+id/tv_das_box"
+        app:layout_constraintTop_toTopOf="@+id/tv_das_box" />
 
     <TextView
         android:id="@+id/tv_das_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:text="@string/das_count"
+        android:layout_marginEnd="8dp"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_das_count_current"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.47" />
+
+    <TextView
+        android:id="@+id/tv_das_count_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_das_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tv_das_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -84,13 +84,14 @@
 
         <TextView
             android:id="@+id/tv_das_red"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="@string/das_item1"
+            android:layout_marginEnd="12dp"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_das_red"
+            app:layout_constraintEnd_toStartOf="@+id/iv_das_yellow"
             app:layout_constraintStart_toEndOf="@+id/iv_das_red"
             app:layout_constraintTop_toTopOf="@+id/iv_das_red" />
 
@@ -106,13 +107,14 @@
 
         <TextView
             android:id="@+id/tv_das_green"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="@string/das_item3"
+            android:layout_marginEnd="12dp"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_das_green"
+            app:layout_constraintEnd_toStartOf="@+id/iv_das_blue"
             app:layout_constraintStart_toEndOf="@+id/iv_das_green"
             app:layout_constraintTop_toTopOf="@+id/iv_das_green" />
 
@@ -128,13 +130,14 @@
 
         <TextView
             android:id="@+id/tv_das_yellow"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="@string/das_item2"
+            android:layout_marginEnd="12dp"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_das_yellow"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_das_yellow"
             app:layout_constraintTop_toTopOf="@+id/iv_das_yellow" />
 
@@ -150,13 +153,14 @@
 
         <TextView
             android:id="@+id/tv_das_blue"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="@string/das_item4"
+            android:layout_marginEnd="12dp"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_das_blue"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_das_blue"
             app:layout_constraintTop_toTopOf="@+id/iv_das_blue" />
 
@@ -165,7 +169,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/das_detail_part"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/iv_das_filter"

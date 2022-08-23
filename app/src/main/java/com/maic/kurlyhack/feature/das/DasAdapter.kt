@@ -1,37 +1,39 @@
 package com.maic.kurlyhack.feature.das
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.maic.kurlyhack.R
-import com.maic.kurlyhack.data.local.DasData
+import com.maic.kurlyhack.data.remote.response.BasketItemData
 import com.maic.kurlyhack.databinding.ItemDasBinding
 
 class DasAdapter : RecyclerView.Adapter<DasAdapter.DasViewHolder>() {
-    val dasList = mutableListOf<DasData>()
+    val dasList = mutableListOf<BasketItemData>()
 
     class DasViewHolder(val binding: ItemDasBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: DasData) {
+        fun onBind(data: BasketItemData) {
             with(binding) {
-                when (data.color) {
-                    "빨강" -> ivDasColor.setImageResource(R.drawable.oval_fill_red)
-                    "노랑" -> ivDasColor.setImageResource(R.drawable.oval_fill_yellow)
-                    "초록" -> ivDasColor.setImageResource(R.drawable.oval_fill_green)
-                    "파랑" -> ivDasColor.setImageResource(R.drawable.oval_fill_blue)
-                    "검정" -> {
+                tvDasBox.text = "BOX" + data.basketNum
+                if (data.todo == null) {
+                    ivDasColor.setImageResource(R.drawable.oval_fill_white)
+                } else {
+                    when (data.todo.color) {
+                        "RED" -> ivDasColor.setImageResource(R.drawable.oval_fill_red)
+                        "YELLOW" -> ivDasColor.setImageResource(R.drawable.oval_fill_yellow)
+                        "GREEN" -> ivDasColor.setImageResource(R.drawable.oval_fill_green)
+                        "BLUE" -> ivDasColor.setImageResource(R.drawable.oval_fill_blue)
+                    }
+                    if (data.todo.status == "WRONG") {
                         ivDasColor.setImageResource(R.drawable.oval_fill_black)
                         ivDasColor.tag = Integer.valueOf(R.drawable.oval_fill_black)
                     }
-                    else -> ivDasColor.setImageResource(R.drawable.oval_fill_white)
+                    tvDasName.text = data.todo.productName
+                    tvDasCount.text = data.todo.productAmount.toString() + "개"
+                    tvDasCountCurrent.text = "(현재 " + data.todo.currentAmount.toString() + "개)"
                 }
-                tvDasBox.text = data.box
-                tvDasName.text = data.name
-                tvDasWeight.text = data.weight
-                tvDasCount.text = data.count
             }
         }
     }
@@ -47,8 +49,8 @@ class DasAdapter : RecyclerView.Adapter<DasAdapter.DasViewHolder>() {
         holder.itemView.setOnClickListener {
             if (holder.binding.ivDasColor.tag == R.drawable.oval_fill_black) {
                 val intent = Intent(it.context, CountErrorActivity::class.java)
-                intent.putExtra("addressBox", dasList[position].box)
-                intent.putExtra("Item", dasList[position].name)
+                intent.putExtra("addressBox", dasList[position].basketNum)
+                intent.putExtra("Item", dasList[position].todo.productName)
                 it.context.startActivity(intent)
             }
         }
