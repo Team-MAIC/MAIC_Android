@@ -28,7 +28,7 @@
     <string name="picking_status_ongoing">진행 중</string>
     <string name="picking_status_complete">전체 진행 완료</string>
     <string name="picking_status_complete_mine">나의 진행 완료</string>
-    
+
     <!-- DAS -->
     <string name="das_title">DAS 관리</string>
     <string name="das_weight">0g</string>
@@ -64,12 +64,12 @@
     <string name="filter_green">초록</string>
     <string name="filter_blue">파랑</string>
     <string name="filter_black">검정</string>
-    
+
     <!-- Das Error Dialog -->
     <string name="error_title">알림</string>
     <string name="error_message1">상품을 추가할 수 없습니다.</string>
     <string name="error_message2">대기열을 확인해 주시기 바랍니다.</string>
-    
+
     <!-- Menu -->
     <string name="menu_title">더보기</string>
     <string name="menu_work">작업 관리</string>
@@ -79,4 +79,13 @@
     <string name="menu_pay">급여명세서</string>
     <string name="menu_logout">로그아웃</string>
     <string name="menu_withdrawal">탈퇴하기</string>
+    <string name="title_activity_picking_help1">PickingHelp1Activity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
