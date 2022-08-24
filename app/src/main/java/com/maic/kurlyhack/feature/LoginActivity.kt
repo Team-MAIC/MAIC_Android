@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.maic.kurlyhack.data.remote.KurlyClient
+import com.maic.kurlyhack.data.remote.request.RequestDeviceToken
 import com.maic.kurlyhack.databinding.ActivityLoginBinding
 import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
@@ -24,10 +25,10 @@ class LoginActivity : AppCompatActivity() {
 
         /** FCM설정, Token값 가져오기 */
         //MyFirebaseMessagingService().getFirebaseToken(binding.etUserNumber)
-        MyFirebaseMessagingService().getFirebaseToken()
-        val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("label", binding.etUserNumber.text)
-        clipboard.setPrimaryClip(clip)
+//        MyFirebaseMessagingService().getFirebaseToken()
+//        val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+//        val clip = ClipData.newPlainText("label", binding.etUserNumber.text)
+//        clipboard.setPrimaryClip(clip)
 
         /** DynamicLink 수신확인 */
         initDynamicLink()
@@ -70,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
             binding.etUserNumber.text.toString().toInt()
         ).callback.onSuccess {
             if (it.data != null) {
-                //MyFirebaseMessagingService().getFirebaseToken(it.data.workerId)
+                MyFirebaseMessagingService().getFirebaseToken(it.data.workerId)
                 val myWork: String
                 val myPart: String
                 val isPick: Boolean
