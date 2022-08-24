@@ -2,6 +2,7 @@ package com.maic.kurlyhack.data.remote.response
 
 data class ResponseBoxData(
     val roundId: Int,
+    val centerRoundNumber: Int,
     val baskets: ArrayList<BasketsData>
 )
 

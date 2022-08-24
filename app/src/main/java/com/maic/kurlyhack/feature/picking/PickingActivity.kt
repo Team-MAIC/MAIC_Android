@@ -12,7 +12,6 @@ import com.maic.kurlyhack.databinding.ActivityPickingBinding
 import com.maic.kurlyhack.feature.OnItemClick
 import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
-import okhttp3.OkHttpClient
 import ua.naiksoftware.stomp.Stomp
 import ua.naiksoftware.stomp.dto.LifecycleEvent
 import java.util.*
@@ -167,12 +166,6 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
                 }
             }
         }
-
-//        val headerList = arrayListOf<StompHeader>()
-//        headerList.add(StompHeader("worker-id", "1"))
-//        stompClient.connect(headerList)
-//        // stompClient.connect()
-//        stompClient.send("/pub/pick/todos/1/A").subscribe()
 
         stompClient.connect()
 
