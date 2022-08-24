@@ -14,6 +14,7 @@ import com.maic.kurlyhack.databinding.ActivityDasBinding
 import com.maic.kurlyhack.feature.OnItemClick
 import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
+import org.json.JSONObject
 import ua.naiksoftware.stomp.Stomp
 import ua.naiksoftware.stomp.dto.LifecycleEvent
 
@@ -39,16 +40,16 @@ class DasActivity : AppCompatActivity(), OnItemClick {
     }
 
     private fun getData() {
+        centerId = intent.getIntExtra("centerId", 0)
         passage = intent.getStringExtra("area")!!.toInt()
-        workerId = intent.getIntExtra("workerId", 0)
         KurlyClient.dasService.getBoxData(
             centerId,
             passage
         ).callback.onSuccess {
-            binding.tvDasDetailPart.text = passage.toString() + "번 통로 : " + it.data!!.centerRoundNumber + "회차"
             if (it.code == 4001) {
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
             } else {
+                binding.tvDasDetailPart.text = passage.toString() + "번 통로 : " + it.data!!.centerRoundNumber + "회차"
                 roundId = it.data!!.roundId
                 centerRoundNumber = it.data.centerRoundNumber
                 val mappingList = arrayListOf<Map<String, Int>>()
@@ -78,6 +79,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
     private fun initAdapter(i: Int) {
         dasAdapter = DasAdapter(this)
         binding.rvDas.adapter = dasAdapter
+
         var resultList = mutableListOf<BasketItemData>()
 
         KurlyClient.dasService.getDasData(
@@ -209,9 +211,31 @@ class DasActivity : AppCompatActivity(), OnItemClick {
 
         stompClient.topic("/sub/das/todos/$centerId/$passage")
             .subscribe {
-//                runOnUiThread {
-//                    initAdapter(filterId)
-//                }
+                Log.d("#######", it.toString())
+                if (it != null) {
+                    Log.d("##", it.payload)
+                    var payloadList = mutableListOf<String>()
+                    val jObject = JSONObject(it.payload)
+                    val dataObject = jObject.getJSONObject("data")
+                    val idxObject = dataObject.getJSONObject("idx")
+                    val todoObject = dataObject.getJSONObject("todo")
+                    val clientIdx = idxObject.getInt("clientIdx")
+                    val basketNum = idxObject.getInt("basketNum")
+                    val currentAmount = todoObject.getInt("currentAmount")
+                    val color = todoObject.getString("color")
+                    val status = todoObject.getString("status")
+                    Log.d("###", "$clientIdx $basketNum")
+                    Log.d("###", "$currentAmount $color $status")
+//                    payloadList.add(currentAmount.toString())
+//                    payloadList.add(color)
+//                    payloadList.add(status)
+                    // payloadList.add(todoObject.toString())
+
+                    runOnUiThread {
+                        // dasAdapter.notifyItemChanged(clientIdx, payloadList)
+                        dasAdapter.notifyItemChanged(clientIdx, "$currentAmount $color $status")
+                    }
+                }
             }
     }
 

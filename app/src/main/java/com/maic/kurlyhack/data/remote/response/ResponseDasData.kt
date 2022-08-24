@@ -11,8 +11,13 @@ data class ColorData(
 )
 
 data class BasketItemData(
-    val basketNum: Int,
+    val idx: BoxIndexData,
     val todo: DasTodoData
+)
+
+data class BoxIndexData(
+    val clientIdx: Int,
+    val basketNum: Int
 )
 
 data class DasTodoData(

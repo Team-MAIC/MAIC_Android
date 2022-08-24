@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.maic.kurlyhack.R
 import com.maic.kurlyhack.data.remote.KurlyClient
@@ -12,13 +13,14 @@ import com.maic.kurlyhack.databinding.ItemDasBinding
 import com.maic.kurlyhack.feature.OnItemClick
 import com.maic.kurlyhack.util.callback
 
-class DasAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapter<DasAdapter.DasViewHolder>() {
+class DasAdapter(private val onItemClick: OnItemClick) :
+    RecyclerView.Adapter<DasAdapter.DasViewHolder>() {
     val dasList = mutableListOf<BasketItemData>()
 
     class DasViewHolder(val binding: ItemDasBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: BasketItemData) {
             with(binding) {
-                tvDasBox.text = "BOX " + data.basketNum
+                tvDasBox.text = "BOX " + data.idx.basketNum
                 if (data.todo == null) {
                     ivDasColor.setImageResource(R.drawable.oval_fill_white)
                 } else {
@@ -47,6 +49,7 @@ class DasAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapter<Da
 
     override fun onBindViewHolder(holder: DasViewHolder, position: Int) {
         holder.onBind(dasList[position])
+        Log.d("###", "여기")
 
         holder.itemView.setOnClickListener {
             val item = dasList[position].todo
@@ -56,7 +59,7 @@ class DasAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapter<Da
             if (holder.binding.ivDasColor.tag == R.drawable.oval_fill_black) {
                 if (item.currentAmount < item.productAmount) {
                     val count = item.productAmount - item.currentAmount
-                    infoList.add(dasList[position].basketNum.toString())
+                    infoList.add(dasList[position].idx.basketNum.toString())
                     infoList.add(item.productName)
                     infoList.add(count.toString())
                     infoList.add(item.productId.toString())
@@ -69,9 +72,77 @@ class DasAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapter<Da
                     }.enqueue()
                 } else {
                     var count = item.productAmount - item.currentAmount
-                    Toast.makeText(holder.itemView.context, item.productName + " " + count + "개 초과 예상", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        holder.itemView.context,
+                        item.productName + " " + count + "개 초과 예상",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
+        }
+    }
+
+    override fun onBindViewHolder(
+        @NonNull holder: DasViewHolder,
+        position: Int,
+        @NonNull payloads: MutableList<Any>
+    ) {
+        Log.d("###", "저기")
+
+        holder.onBind(dasList[position])
+        if (payloads.isNotEmpty()) {
+            var myPayLoads = payloads.toString()
+            Log.d("##", myPayLoads)
+            val count = myPayLoads.split(" ")[0].substring(1)
+            val color = myPayLoads.split(" ")[1]
+            val status = myPayLoads.split(" ")[2].subSequence(0 until 5).toString()
+            Log.d("##", count)
+            Log.d("##", color)
+            Log.d("##", status)
+
+            when (color) {
+                "RED" -> holder.binding.ivDasColor.setImageResource(R.drawable.oval_fill_red)
+                "YELLOW" -> holder.binding.ivDasColor.setImageResource(R.drawable.oval_fill_yellow)
+                "GREEN" -> holder.binding.ivDasColor.setImageResource(R.drawable.oval_fill_green)
+                "BLUE" -> holder.binding.ivDasColor.setImageResource(R.drawable.oval_fill_blue)
+            }
+            if (status == "WRONG") {
+                holder.binding.ivDasColor.setImageResource(R.drawable.oval_fill_black)
+                holder.binding.ivDasColor.tag = Integer.valueOf(R.drawable.oval_fill_black)
+            }
+            holder.binding.tvDasCountCurrent.text = "(현재 " + count + "개)"
+
+            holder.itemView.setOnClickListener {
+                val item = dasList[position].todo
+                val infoList = ArrayList<String>()
+                var image = ""
+
+                if (holder.binding.ivDasColor.tag == R.drawable.oval_fill_black) {
+                    if (item.currentAmount < item.productAmount) {
+                        val count = item.productAmount - count.toInt()
+                        infoList.add(dasList[position].idx.basketNum.toString())
+                        infoList.add(item.productName)
+                        infoList.add(count.toString())
+                        infoList.add(item.productId.toString())
+                        KurlyClient.dasService.getProductData(
+                            item.productId
+                        ).callback.onSuccess {
+                            image = it.data!!.productThumbnail
+                            infoList.add(image)
+                            onItemClick.onListClick(infoList)
+                        }.enqueue()
+                    } else {
+                        var count = item.productAmount - count.toInt()
+                        Toast.makeText(
+                            holder.itemView.context,
+                            item.productName + " " + count + "개 초과 예상",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        } else {
+            onBindViewHolder(holder, position)
         }
     }
 
