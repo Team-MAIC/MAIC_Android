@@ -55,6 +55,8 @@ class DasAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapter<Da
                     infoList.add(dasList[position].basketNum.toString())
                     infoList.add(item.productName)
                     infoList.add(count.toString())
+                    infoList.add(item.productId.toString())
+
                     onItemClick.onListClick(infoList)
                 } else {
                     var count = item.productAmount - item.currentAmount

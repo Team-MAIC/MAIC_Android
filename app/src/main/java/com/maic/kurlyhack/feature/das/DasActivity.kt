@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.data.remote.request.RequestDasSubscribe
+import com.maic.kurlyhack.data.remote.request.RequestMapping
 import com.maic.kurlyhack.data.remote.response.BasketItemData
 import com.maic.kurlyhack.databinding.ActivityDasBinding
 import com.maic.kurlyhack.feature.OnItemClick
@@ -23,6 +24,8 @@ class DasActivity : AppCompatActivity(), OnItemClick {
     var centerId = 0
     var roundId = 0
     var filterId = 0
+    var centerRoundNumber = 0
+    var workerId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,12 @@ class DasActivity : AppCompatActivity(), OnItemClick {
         getData()
         initBtnListener()
         connectWebSocket()
+//        val list = ArrayList<String?>()
+//        list.add("Robin")
+//        list.add("John")
+//        val jsonArray = JSONArray(list)
+//        val dataToSend = jsonArray.toString()
+//        Log.d("##", dataToSend)
 
         setContentView(binding.root)
     }
@@ -38,6 +47,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
     private fun getData() {
         passage = intent.getStringExtra("area")!!.toInt()
         centerId = intent.getIntExtra("centerId", 0)
+        workerId = intent.getIntExtra("workerId", 0)
         KurlyClient.dasService.getBoxData(
             centerId,
             passage
@@ -47,7 +57,27 @@ class DasActivity : AppCompatActivity(), OnItemClick {
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
             } else {
                 roundId = it.data!!.roundId
-                initAdapter(0)
+                centerRoundNumber = it.data.centerRoundNumber
+                val mappingList = arrayListOf<Map<String, Int>>()
+                for (i in 0 until it.data.baskets.size) {
+                    var map = mutableMapOf<String, Int>()
+                    map["clientIdx"] = i
+                    map["basketNum"] = it.data.baskets[i].basketNum
+                    mappingList.add(map)
+                    Log.d("###", mappingList.toString())
+                }
+
+                val requestMapping = RequestMapping(
+                    baskets = mappingList
+                )
+
+                KurlyClient.dasService.postMapping(
+                    centerId,
+                    passage,
+                    requestMapping
+                ).callback.onSuccess {
+                    initAdapter(0)
+                }.enqueue()
             }
         }.enqueue()
     }
@@ -135,7 +165,11 @@ class DasActivity : AppCompatActivity(), OnItemClick {
         }
 
         binding.btnDasBarcode.setOnClickListener {
-            startActivity(Intent(this@DasActivity, DasBarcodeActivity::class.java))
+            val intent = Intent(this@DasActivity, DasBarcodeActivity::class.java)
+            intent.putExtra("roundId", roundId)
+            intent.putExtra("passage", passage)
+            intent.putExtra("centerId", centerId)
+            startActivity(intent)
         }
 
         binding.ivDasMenu.setOnClickListener {
@@ -146,7 +180,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
     @SuppressLint("CheckResult")
     private fun connectWebSocket() {
 
-        val url = "ws://192.168.100.33:8080/ws/websocket" // 소켓에 연결하는 엔드포인트가 /socket일때 다음과 같음
+        val url = "wss://project-maic.com/wss/websocket" // 소켓에 연결하는 엔드포인트가 /socket일때 다음과 같음
         val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
 
         stompClient.lifecycle().subscribe { lifecycleEvent ->
@@ -182,10 +216,9 @@ class DasActivity : AppCompatActivity(), OnItemClick {
 
         stompClient.topic("/sub/das/todos/$centerId/$passage")
             .subscribe {
-                runOnUiThread {
-                    Log.d("###", "성공")
-                    // initAdapter(mCategory)
-                }
+//                runOnUiThread {
+//                    initAdapter(filterId)
+//                }
             }
     }
 
@@ -206,6 +239,9 @@ class DasActivity : AppCompatActivity(), OnItemClick {
         val intent = Intent(this, CountErrorActivity::class.java)
         intent.putExtra("info", value)
         intent.putExtra("passage", passage)
+        intent.putExtra("roundId", roundId)
+        intent.putExtra("centerRoundNumber", centerRoundNumber)
+        intent.putExtra("workerId", workerId)
         startActivity(intent)
     }
 }
