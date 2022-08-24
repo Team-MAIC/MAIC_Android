@@ -15,6 +15,8 @@ import com.maic.kurlyhack.R
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.databinding.ActivityDasBarcodeBinding
 import com.maic.kurlyhack.feature.OnItemClick
+import com.maic.kurlyhack.feature.help.DasHelp1Activity
+import com.maic.kurlyhack.feature.help.DasHelp8Activity
 import com.maic.kurlyhack.feature.picking.BarcodeDialog
 import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
@@ -65,6 +67,7 @@ class DasBarcodeActivity : AppCompatActivity(), OnItemClick {
         binding.ivDasBarcodeMenu.setOnClickListener {
             showDrawer(binding.drawerLayout, binding.navView)
         }
+
     }
 
     private fun checkBarcode(code: String) {

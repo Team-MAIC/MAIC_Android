@@ -38,6 +38,8 @@
         android:layout_marginEnd="12dp"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
         app:layout_constraintBottom_toBottomOf="@+id/tv_das_box"
         app:layout_constraintEnd_toStartOf="@+id/tv_das_count"
         app:layout_constraintStart_toEndOf="@+id/tv_das_box"

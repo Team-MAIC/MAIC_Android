@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/cl_pick_help8"
+    tools:context=".feature.help.PickingHelp8Activity">
+
+    <ImageView
+        android:id="@+id/iv_pick_help8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pick_help8" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_pick_help"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="피킹 학습 종료하기"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

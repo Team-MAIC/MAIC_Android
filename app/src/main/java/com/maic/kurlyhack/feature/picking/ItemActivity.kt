@@ -1,10 +1,14 @@
 package com.maic.kurlyhack.feature.picking
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.maic.kurlyhack.databinding.ActivityItemBinding
+import com.maic.kurlyhack.feature.help.DasHelp1Activity
+import com.maic.kurlyhack.feature.help.DasHelp8Activity
+import com.maic.kurlyhack.feature.help.PickingHelp1Activity
 import com.maic.kurlyhack.util.showDrawer
 
 class ItemActivity : AppCompatActivity() {
@@ -41,5 +45,6 @@ class ItemActivity : AppCompatActivity() {
         binding.ivItemMenu.setOnClickListener {
             showDrawer(binding.drawerLayout, binding.navView)
         }
+
     }
 }
