@@ -97,11 +97,13 @@ class DasActivity : AppCompatActivity(), OnItemClick {
             when (i) {
                 0 -> {
                     resultList = it.data!!.baskets
+                    postCategoryIdx(resultList)
                 }
                 1 -> {
                     resultList = it.data!!.baskets.filter {
                         it.todo != null
                     }.toMutableList()
+                    postCategoryIdx(resultList)
                 }
                 2 -> {
                     resultList = it.data!!.baskets.filter {
@@ -111,6 +113,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
                     }.toMutableList().filter {
                         it.todo.status == "READY"
                     }.toMutableList()
+                    postCategoryIdx(resultList)
                 }
                 3 -> {
                     resultList = it.data!!.baskets.filter {
@@ -120,6 +123,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
                     }.toMutableList().filter {
                         it.todo.status == "READY"
                     }.toMutableList()
+                    postCategoryIdx(resultList)
                 }
                 4 -> {
                     resultList = it.data!!.baskets.filter {
@@ -129,6 +133,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
                     }.toMutableList().filter {
                         it.todo.status == "READY"
                     }.toMutableList()
+                    postCategoryIdx(resultList)
                 }
                 5 -> {
                     resultList = it.data!!.baskets.filter {
@@ -138,6 +143,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
                     }.toMutableList().filter {
                         it.todo.status == "READY"
                     }.toMutableList()
+                    postCategoryIdx(resultList)
                 }
                 6 -> {
                     resultList = it.data!!.baskets.filter {
@@ -145,10 +151,34 @@ class DasActivity : AppCompatActivity(), OnItemClick {
                     }.toMutableList().filter {
                         it.todo.status == "WRONG"
                     }.toMutableList()
+                    postCategoryIdx(resultList)
                 }
             }
             dasAdapter.dasList.addAll(resultList)
             dasAdapter.notifyDataSetChanged()
+        }.enqueue()
+    }
+
+    private fun postCategoryIdx(resultList: MutableList<BasketItemData>) {
+        Log.d("##33", resultList.toString())
+        val mappingList = arrayListOf<Map<String, Int>>()
+        for (i in 0 until resultList.size) {
+            var map = mutableMapOf<String, Int>()
+            map["clientIdx"] = i
+            map["basketNum"] = resultList[i].idx.basketNum
+            mappingList.add(map)
+        }
+        Log.d("###2", mappingList.toString())
+        val requestMapping = RequestMapping(
+            baskets = mappingList
+        )
+
+        KurlyClient.dasService.postMapping(
+            centerId,
+            passage,
+            requestMapping
+        ).callback.onSuccess {
+            Log.d("###", "매핑 성공")
         }.enqueue()
     }
 
@@ -232,13 +262,27 @@ class DasActivity : AppCompatActivity(), OnItemClick {
 
     override fun onClick(value: String) {
         when (value) {
-            "ALL" -> filterId = 0
-            "ONGOING" -> filterId = 1
-            "RED" -> filterId = 2
-            "YELLOW" -> filterId = 3
-            "GREEN" -> filterId = 4
-            "BLUE" -> filterId = 5
-            "BLACK" -> filterId = 6
+            "ALL" -> {
+                filterId = 0
+            }
+            "ONGOING" -> {
+                filterId = 1
+            }
+            "RED" -> {
+                filterId = 2
+            }
+            "YELLOW" -> {
+                filterId = 3
+            }
+            "GREEN" -> {
+                filterId = 4
+            }
+            "BLUE" -> {
+                filterId = 5
+            }
+            "BLACK" -> {
+                filterId = 6
+            }
         }
         initAdapter(filterId)
     }

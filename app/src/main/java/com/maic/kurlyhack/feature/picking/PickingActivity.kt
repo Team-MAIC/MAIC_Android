@@ -182,11 +182,10 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
 
         stompClient.topic("/sub/pick/todos/$roundId/$area")
             .subscribe {
-//                runOnUiThread {
-//                    initAdapter(mCategory)
-//                }
-
-                // Log.d("message Receive", topicMessage.payload)
+                Log.d("message Receive", it.payload)
+                runOnUiThread {
+                    initAdapter(mCategory)
+                }
             }
 
         //        stompClient.topic("/pub/pick/todos/1/A")

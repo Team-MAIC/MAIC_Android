@@ -1,6 +1,5 @@
 package com.maic.kurlyhack.feature.das
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -49,7 +48,6 @@ class DasAdapter(private val onItemClick: OnItemClick) :
 
     override fun onBindViewHolder(holder: DasViewHolder, position: Int) {
         holder.onBind(dasList[position])
-        Log.d("###", "여기")
 
         holder.itemView.setOnClickListener {
             val item = dasList[position].todo
@@ -71,7 +69,7 @@ class DasAdapter(private val onItemClick: OnItemClick) :
                         onItemClick.onListClick(infoList)
                     }.enqueue()
                 } else {
-                    var count = item.productAmount - item.currentAmount
+                    var count = item.currentAmount - item.productAmount
                     Toast.makeText(
                         holder.itemView.context,
                         item.productName + " " + count + "개 초과 예상",
@@ -87,18 +85,13 @@ class DasAdapter(private val onItemClick: OnItemClick) :
         position: Int,
         @NonNull payloads: MutableList<Any>
     ) {
-        Log.d("###", "저기")
 
         holder.onBind(dasList[position])
         if (payloads.isNotEmpty()) {
             var myPayLoads = payloads.toString()
-            Log.d("##", myPayLoads)
             val count = myPayLoads.split(" ")[0].substring(1)
             val color = myPayLoads.split(" ")[1]
             val status = myPayLoads.split(" ")[2].subSequence(0 until 5).toString()
-            Log.d("##", count)
-            Log.d("##", color)
-            Log.d("##", status)
 
             when (color) {
                 "RED" -> holder.binding.ivDasColor.setImageResource(R.drawable.oval_fill_red)
@@ -132,7 +125,7 @@ class DasAdapter(private val onItemClick: OnItemClick) :
                             onItemClick.onListClick(infoList)
                         }.enqueue()
                     } else {
-                        var count = item.productAmount - count.toInt()
+                        var count = count.toInt() - item.productAmount
                         Toast.makeText(
                             holder.itemView.context,
                             item.productName + " " + count + "개 초과 예상",
