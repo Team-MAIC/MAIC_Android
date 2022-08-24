@@ -8,7 +8,6 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
-import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.firebase.messaging.FirebaseMessaging
@@ -79,7 +78,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // 알림에 대한 UI 정보, 작업
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.mipmap.ic_launcher) // 아이콘 설정
+            .setSmallIcon(R.mipmap.ic_app) // 아이콘 설정
             .setContentTitle(remoteMessage.data["title"].toString()) // 제목
             .setContentText(remoteMessage.data["body"].toString()) // 메시지 내용
             .setAutoCancel(true) // 알람클릭시 삭제여부
@@ -98,12 +97,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager.notify(uniId, notificationBuilder.build())
     }
 
-    /** Token 가져오기 */
-    fun getFirebaseToken(tv: TextView) {
-        FirebaseMessaging.getInstance().token.addOnSuccessListener {
-            Log.d(TAG, "token=$it")
-            tv.text = it
-        }
+//    /** Token 가져오기 */
+//    fun getFirebaseToken(tv: TextView) {
+//        FirebaseMessaging.getInstance().token.addOnSuccessListener {
+//            Log.d(TAG, "token=$it")
+//            tv.text = it
+//        }
 
 //        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
 //                if (!task.isSuccessful) {
@@ -113,12 +112,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //                var deviceToken = task.result
 //                Log.e(TAG, "token=${deviceToken}")
 //            })
-    }
+//    }
 
-    /* 원본
     fun getFirebaseToken() {
         FirebaseMessaging.getInstance().token.addOnSuccessListener {
-            Log.d(TAG, "token=$it")
+            Log.d("###", "token=$it")
         }
 
 //        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
@@ -130,7 +128,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //                Log.e(TAG, "token=${deviceToken}")
 //            })
     }
-     */
 }
 
 /**

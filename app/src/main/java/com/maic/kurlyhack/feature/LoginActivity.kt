@@ -21,11 +21,10 @@ class LoginActivity : AppCompatActivity() {
 
         activeBtn()
         clickBtnListener()
-        //MyFirebaseMessagingService().showToken(binding.etUserNumber)
 
         /** FCM설정, Token값 가져오기 */
-        MyFirebaseMessagingService().getFirebaseToken(binding.etUserNumber)
-        // MyFirebaseMessagingService().getFirebaseToken()
+        //MyFirebaseMessagingService().getFirebaseToken(binding.etUserNumber)
+        MyFirebaseMessagingService().getFirebaseToken()
         val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("label", binding.etUserNumber.text)
         clipboard.setPrimaryClip(clip)
