@@ -34,25 +34,18 @@ class DasActivity : AppCompatActivity(), OnItemClick {
         getData()
         initBtnListener()
         connectWebSocket()
-//        val list = ArrayList<String?>()
-//        list.add("Robin")
-//        list.add("John")
-//        val jsonArray = JSONArray(list)
-//        val dataToSend = jsonArray.toString()
-//        Log.d("##", dataToSend)
 
         setContentView(binding.root)
     }
 
     private fun getData() {
         passage = intent.getStringExtra("area")!!.toInt()
-        centerId = intent.getIntExtra("centerId", 0)
         workerId = intent.getIntExtra("workerId", 0)
         KurlyClient.dasService.getBoxData(
             centerId,
             passage
         ).callback.onSuccess {
-            binding.tvDasDetailPart.text = passage.toString() + "번 통로 : " + centerId + "회차"
+            binding.tvDasDetailPart.text = passage.toString() + "번 통로 : " + it.data!!.centerRoundNumber + "회차"
             if (it.code == 4001) {
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
             } else {

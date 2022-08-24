@@ -24,6 +24,7 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
     private var workerId = 0
     private var mCategory = 10
     private var roundId = 0
+    private var centerRoundNumber = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +44,8 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
         workerId = intent.getIntExtra("workerId", 0)
         roundId = intent.getIntExtra("roundId", 0)
         area = intent.getStringExtra("area").toString()
-        binding.tvPickingPart.text = roundId.toString() + "회차"
+        centerRoundNumber = intent.getStringExtra("centerRoundNumber")!![0].toString()
+        binding.tvPickingPart.text = centerRoundNumber + "회차"
     }
 
     private fun initAdapter(i: Int) {
@@ -187,9 +189,9 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
 
         stompClient.topic("/sub/pick/todos/$roundId/$area")
             .subscribe {
-                runOnUiThread {
-                    initAdapter(mCategory)
-                }
+//                runOnUiThread {
+//                    initAdapter(mCategory)
+//                }
 
                 // Log.d("message Receive", topicMessage.payload)
             }
@@ -219,12 +221,12 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
             val intent = Intent(this, PickingBarCodeActivity::class.java)
             intent.putExtra("workerId", workerId)
             intent.putExtra("pickingInfo", value)
-            intent.putExtra("pickingPart", roundId.toString() + "회차")
+            intent.putExtra("pickingPart", centerRoundNumber + "회차")
             startActivity(intent)
         } else {
             val intent = Intent(this, ItemActivity::class.java)
             intent.putExtra("isSuccess", true)
-            intent.putExtra("partAddress", roundId.toString() + "회차 " + value[0])
+            intent.putExtra("partAddress", centerRoundNumber + "회차 " + value[0])
             intent.putExtra("item", value[1] + " " + value[2])
             intent.putExtra("picture", value[4])
             startActivity(intent)
