@@ -29,4 +29,9 @@ interface DasService {
         @Path("passage") passage: Int,
         @Body body: RequestMapping
     ): Call<ResponseWrapper<ResponseBase>>
+
+    @GET("products/{productId}")
+    fun getProductData(
+        @Path("productId") productId: Int
+    ): Call<ResponseWrapper<ResponseProductData>>
 }

@@ -1,13 +1,16 @@
 package com.maic.kurlyhack.feature.das
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.maic.kurlyhack.R
+import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.data.remote.response.BasketItemData
 import com.maic.kurlyhack.databinding.ItemDasBinding
 import com.maic.kurlyhack.feature.OnItemClick
+import com.maic.kurlyhack.util.callback
 
 class DasAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapter<DasAdapter.DasViewHolder>() {
     val dasList = mutableListOf<BasketItemData>()
@@ -48,6 +51,7 @@ class DasAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapter<Da
         holder.itemView.setOnClickListener {
             val item = dasList[position].todo
             val infoList = ArrayList<String>()
+            var image = ""
 
             if (holder.binding.ivDasColor.tag == R.drawable.oval_fill_black) {
                 if (item.currentAmount < item.productAmount) {
@@ -56,8 +60,13 @@ class DasAdapter(private val onItemClick: OnItemClick) : RecyclerView.Adapter<Da
                     infoList.add(item.productName)
                     infoList.add(count.toString())
                     infoList.add(item.productId.toString())
-
-                    onItemClick.onListClick(infoList)
+                    KurlyClient.dasService.getProductData(
+                        item.productId
+                    ).callback.onSuccess {
+                        image = it.data!!.productThumbnail
+                        infoList.add(image)
+                        onItemClick.onListClick(infoList)
+                    }.enqueue()
                 } else {
                     var count = item.productAmount - item.currentAmount
                     Toast.makeText(holder.itemView.context, item.productName + " " + count + "개 초과 예상", Toast.LENGTH_SHORT).show()
