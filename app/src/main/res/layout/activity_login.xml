@@ -66,6 +66,7 @@
             android:background="@drawable/selector_line"
             android:ems="10"
             android:inputType="number"
+            android:gravity="center_horizontal"
             android:padding="4dp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/btn_main_start"
