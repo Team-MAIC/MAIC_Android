@@ -55,6 +55,7 @@ class PickingBarCodeActivity : AppCompatActivity(), OnItemClick {
     private fun getData() {
         val infoList = intent.getStringArrayListExtra("pickingInfo")
         val part = intent.getStringExtra("pickingPart")
+        workerId = intent.getIntExtra("workerId", workerId)
 
         if (infoList != null) {
             val name = infoList[1].toString()
@@ -98,6 +99,7 @@ class PickingBarCodeActivity : AppCompatActivity(), OnItemClick {
                 if (it.data?.result == 1) {
                     // 성공
                     finish()
+                    Log.d("###", workerId.toString())
                     KurlyClient.barcodeService.putPickData(
                         workerId,
                         pickTodoId
