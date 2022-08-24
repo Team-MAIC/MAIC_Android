@@ -118,7 +118,7 @@ class DasAdapter(private val onItemClick: OnItemClick) :
                 var image = ""
 
                 if (holder.binding.ivDasColor.tag == R.drawable.oval_fill_black) {
-                    if (item.currentAmount < item.productAmount) {
+                    if (count.toInt() < item.productAmount) {
                         val count = item.productAmount - count.toInt()
                         infoList.add(dasList[position].idx.basketNum.toString())
                         infoList.add(item.productName)

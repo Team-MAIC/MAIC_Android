@@ -58,9 +58,8 @@ class DasActivity : AppCompatActivity(), OnItemClick {
                     map["clientIdx"] = i
                     map["basketNum"] = it.data.baskets[i].basketNum
                     mappingList.add(map)
-                    Log.d("###", mappingList.toString())
                 }
-
+                Log.d("###2", mappingList.toString())
                 val requestMapping = RequestMapping(
                     baskets = mappingList
                 )
@@ -211,10 +210,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
 
         stompClient.topic("/sub/das/todos/$centerId/$passage")
             .subscribe {
-                Log.d("#######", it.toString())
                 if (it != null) {
-                    Log.d("##", it.payload)
-                    var payloadList = mutableListOf<String>()
                     val jObject = JSONObject(it.payload)
                     val dataObject = jObject.getJSONObject("data")
                     val idxObject = dataObject.getJSONObject("idx")
@@ -226,13 +222,8 @@ class DasActivity : AppCompatActivity(), OnItemClick {
                     val status = todoObject.getString("status")
                     Log.d("###", "$clientIdx $basketNum")
                     Log.d("###", "$currentAmount $color $status")
-//                    payloadList.add(currentAmount.toString())
-//                    payloadList.add(color)
-//                    payloadList.add(status)
-                    // payloadList.add(todoObject.toString())
 
                     runOnUiThread {
-                        // dasAdapter.notifyItemChanged(clientIdx, payloadList)
                         dasAdapter.notifyItemChanged(clientIdx, "$currentAmount $color $status")
                     }
                 }
