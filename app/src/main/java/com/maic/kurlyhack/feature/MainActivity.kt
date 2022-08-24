@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     var workerId = 0
     var isPick = false
     var area = ""
+    var centerId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,18 +30,24 @@ class MainActivity : AppCompatActivity() {
         isPick = intent.getBooleanExtra("isPick", false)
         binding.tvMainPart.text = intent.getStringExtra("workerPart")
         area = binding.tvMainPart.text.split(' ')[2]
+        centerId = intent.getIntExtra("centerId", 0)
     }
 
     private fun initClickListener() {
-        // TODO: 작업내용이 피킹인지 다스인지 확인하고 화면 연결
         binding.btnMainStart.setOnClickListener {
             if (isPick) {
                 val intent = Intent(this@MainActivity, SelectPickingActivity::class.java)
                 intent.putExtra("workerId", workerId)
                 intent.putExtra("workerArea", area)
                 startActivity(intent)
+                finish()
             } else {
-                startActivity(Intent(this@MainActivity, DasActivity::class.java))
+                val intent = Intent(this@MainActivity, DasActivity::class.java)
+                intent.putExtra("area", area)
+                intent.putExtra("centerId", centerId)
+                intent.putExtra("workerId", workerId)
+                startActivity(intent)
+                finish()
             }
         }
 

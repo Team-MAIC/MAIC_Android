@@ -12,7 +12,6 @@ import com.maic.kurlyhack.databinding.ActivityPickingBinding
 import com.maic.kurlyhack.feature.OnItemClick
 import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
-import okhttp3.OkHttpClient
 import ua.naiksoftware.stomp.Stomp
 import ua.naiksoftware.stomp.dto.LifecycleEvent
 import java.util.*
@@ -24,6 +23,7 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
     private var workerId = 0
     private var mCategory = 10
     private var roundId = 0
+    private var centerRoundNumber = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,8 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
         workerId = intent.getIntExtra("workerId", 0)
         roundId = intent.getIntExtra("roundId", 0)
         area = intent.getStringExtra("area").toString()
-        binding.tvPickingPart.text = roundId.toString() + "회차"
+        centerRoundNumber = intent.getStringExtra("centerRoundNumber")!![0].toString()
+        binding.tvPickingPart.text = centerRoundNumber + "회차"
     }
 
     private fun initAdapter(i: Int) {
@@ -89,7 +90,9 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
 
     private fun initClickListener() {
         binding.ivPickingNotice.setOnClickListener {
-            startActivity(Intent(this@PickingActivity, NoticeActivity::class.java))
+            val intent = Intent(this@PickingActivity, NoticeActivity::class.java)
+            intent.putExtra("workerId", workerId)
+            startActivity(intent)
         }
 
         binding.ivPickingMenu.setOnClickListener {
@@ -143,7 +146,7 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
     @SuppressLint("CheckResult")
     private fun connectWebSocket() {
 
-        val url = "ws://192.168.100.33:8080/ws/websocket" // 소켓에 연결하는 엔드포인트가 /socket일때 다음과 같음
+        val url = "wss://project-maic.com/wss/websocket" // 소켓에 연결하는 엔드포인트가 /socket일때 다음과 같음
         val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
 
         stompClient.lifecycle().subscribe { lifecycleEvent ->
@@ -164,12 +167,6 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
             }
         }
 
-//        val headerList = arrayListOf<StompHeader>()
-//        headerList.add(StompHeader("worker-id", "1"))
-//        stompClient.connect(headerList)
-//        // stompClient.connect()
-//        stompClient.send("/pub/pick/todos/1/A").subscribe()
-
         stompClient.connect()
 
         val requestSubscribe = RequestSubscribe(
@@ -185,11 +182,10 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
 
         stompClient.topic("/sub/pick/todos/$roundId/$area")
             .subscribe {
+                Log.d("message Receive", it.payload)
                 runOnUiThread {
                     initAdapter(mCategory)
                 }
-
-                // Log.d("message Receive", topicMessage.payload)
             }
 
         //        stompClient.topic("/pub/pick/todos/1/A")
@@ -217,13 +213,14 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
             val intent = Intent(this, PickingBarCodeActivity::class.java)
             intent.putExtra("workerId", workerId)
             intent.putExtra("pickingInfo", value)
-            intent.putExtra("pickingPart", roundId.toString() + "회차")
+            intent.putExtra("pickingPart", centerRoundNumber + "회차")
             startActivity(intent)
         } else {
             val intent = Intent(this, ItemActivity::class.java)
             intent.putExtra("isSuccess", true)
-            intent.putExtra("partAddress", roundId.toString() + "회차 " + value[0])
+            intent.putExtra("partAddress", centerRoundNumber + "회차 " + value[0])
             intent.putExtra("item", value[1] + " " + value[2])
+            intent.putExtra("picture", value[4])
             startActivity(intent)
         }
     }

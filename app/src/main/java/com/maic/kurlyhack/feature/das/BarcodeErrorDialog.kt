@@ -23,7 +23,7 @@ class BarcodeErrorDialog(context: Context) {
         val mBtn = dialog.findViewById<Button>(R.id.btn_barcode_error_confirm)
 
         mBtn.setOnClickListener {
-            onItemClick.onClick("error")
+            onItemClick.onClick("ok")
             dialog.dismiss()
         }
     }

@@ -1,15 +1,13 @@
 package com.maic.kurlyhack.data.remote
 
-import com.maic.kurlyhack.data.remote.api.BarcodeService
-import com.maic.kurlyhack.data.remote.api.PickingService
-import com.maic.kurlyhack.data.remote.api.UserService
+import com.maic.kurlyhack.data.remote.api.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object KurlyClient {
-    private const val BASE_URL = "http://192.168.100.33:8080/"
+    private const val BASE_URL = "https://project-maic.com/"
 
     val userService: UserService by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         provideService(UserService::class.java)
@@ -21,6 +19,14 @@ object KurlyClient {
 
     val barcodeService: BarcodeService by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
         provideService(BarcodeService::class.java)
+    }
+
+    val dasService: DasService by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        provideService(DasService::class.java)
+    }
+
+    val messageService: MessageService by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        provideService(MessageService::class.java)
     }
 
     private fun <T> provideService(clazz: Class<T>): T = Retrofit.Builder()

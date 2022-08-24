@@ -28,31 +28,31 @@ class FilterDialog(context: Context) {
         mGroup.setOnCheckedChangeListener { radioGroup, checkedId ->
             when (checkedId) {
                 R.id.rb_filter_all -> {
-                    mFilter = "전체"
+                    mFilter = "ALL"
                     mBtn.isEnabled = true
                 }
                 R.id.rb_filter_ongoing -> {
-                    mFilter = "진행 중"
+                    mFilter = "ONGOING"
                     mBtn.isEnabled = true
                 }
                 R.id.rb_filter_red -> {
-                    mFilter = "빨강"
+                    mFilter = "RED"
                     mBtn.isEnabled = true
                 }
                 R.id.rb_filter_yellow -> {
-                    mFilter = "노랑"
+                    mFilter = "YELLOW"
                     mBtn.isEnabled = true
                 }
                 R.id.rb_filter_green -> {
-                    mFilter = "초록"
+                    mFilter = "GREEN"
                     mBtn.isEnabled = true
                 }
                 R.id.rb_filter_blue -> {
-                    mFilter = "파랑"
+                    mFilter = "BLUE"
                     mBtn.isEnabled = true
                 }
                 R.id.rb_filter_black -> {
-                    mFilter = "검정"
+                    mFilter = "BLACK"
                     mBtn.isEnabled = true
                 }
             }

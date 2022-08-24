@@ -60,13 +60,14 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
     }
 
     override fun onClick(value: String) {
-        val intent = Intent(this, PickingActivity::class.java)
-        intent.putExtra("roundId", value.toInt())
-        intent.putExtra("area", area)
-        intent.putExtra("workerId", workerId)
-        startActivity(intent)
     }
 
     override fun onListClick(value: ArrayList<String>) {
+        val intent = Intent(this, PickingActivity::class.java)
+        intent.putExtra("roundId", value[0].toInt())
+        intent.putExtra("centerRoundNumber", value[1])
+        intent.putExtra("area", area)
+        intent.putExtra("workerId", workerId)
+        startActivity(intent)
     }
 }

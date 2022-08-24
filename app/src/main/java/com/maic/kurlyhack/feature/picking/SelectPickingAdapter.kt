@@ -14,9 +14,8 @@ class SelectPickingAdapter(private val onItemClick: OnItemClick) : RecyclerView.
     val partList = mutableListOf<RoundData>()
 
     class SelectPickingViewHolder(val binding: ItemPartBinding) : RecyclerView.ViewHolder(binding.root) {
-        private var isFirst = true
         fun onBind(data: RoundData) {
-            binding.tvPart.text = data.roundId.toString() + "회차"
+            binding.tvPart.text = data.centerRoundNumber.toString() + "회차"
         }
     }
 
@@ -29,13 +28,17 @@ class SelectPickingAdapter(private val onItemClick: OnItemClick) : RecyclerView.
         holder.onBind(partList[position])
 
         var roundId = partList[position].roundId
+        val infoList = ArrayList<String>()
+
         if (position == 0) {
             holder.itemView.setOnClickListener {
                 holder.binding.tvPart.textSize = 19f
                 holder.binding.tvPart.setTypeface(null, Typeface.BOLD)
-                onItemClick.onClick(roundId.toString())
+                infoList.add(roundId.toString())
+                infoList.add(holder.binding.tvPart.text.toString())
+                onItemClick.onListClick(infoList)
             }
-        }else{
+        } else {
             holder.binding.tvPart.setTextColor(Color.LTGRAY)
         }
     }
