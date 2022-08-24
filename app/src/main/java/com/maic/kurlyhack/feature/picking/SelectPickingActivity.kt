@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.databinding.ActivitySelectPickingBinding
 import com.maic.kurlyhack.feature.OnItemClick
+import com.maic.kurlyhack.feature.help.PickingHelp1Activity
 import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
 

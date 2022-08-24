@@ -19,4 +19,5 @@
     <color name="yellow">#FFF200</color>
     <color name="green">#13FF02</color>
     <color name="blue">#033EFF</color>
+    <string name="light_yellow">#FFDE00</string>
 </resources>

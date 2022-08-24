@@ -13,6 +13,57 @@
         android:theme="@style/Theme.KurlyHack"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".feature.help.DasHelp8Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.DasHelp7Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.DasHelp6Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.DasHelp5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.DasHelp4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.DasHelp3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.DasHelp2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.DasHelp1Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.PickingHelp9Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.PickingHelp8Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.PickingHelp7Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.PickingHelp6Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.PickingHelp5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.PickingHelp4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.PickingHelp3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.PickingHelp2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".feature.help.PickingHelp1Activity"
+            android:exported="false" />
+        <activity
             android:name=".feature.LoginActivity"
             android:exported="true">
             <intent-filter>

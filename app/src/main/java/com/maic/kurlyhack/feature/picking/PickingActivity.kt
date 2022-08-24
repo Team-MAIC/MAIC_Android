@@ -10,6 +10,7 @@ import com.maic.kurlyhack.data.remote.request.RequestSubscribe
 import com.maic.kurlyhack.data.remote.response.PickingTodoData
 import com.maic.kurlyhack.databinding.ActivityPickingBinding
 import com.maic.kurlyhack.feature.OnItemClick
+import com.maic.kurlyhack.feature.help.PickingHelp1Activity
 import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
 import ua.naiksoftware.stomp.Stomp

@@ -1,5 +1,6 @@
 package com.maic.kurlyhack.feature.das
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -8,6 +9,8 @@ import com.bumptech.glide.Glide
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.data.remote.request.RequestMessage
 import com.maic.kurlyhack.databinding.ActivityCountErrorBinding
+import com.maic.kurlyhack.feature.help.DasHelp1Activity
+import com.maic.kurlyhack.feature.help.DasHelp8Activity
 import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
 
