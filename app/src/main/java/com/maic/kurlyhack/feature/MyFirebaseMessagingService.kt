@@ -14,6 +14,9 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.maic.kurlyhack.R
+import com.maic.kurlyhack.data.remote.KurlyClient
+import com.maic.kurlyhack.data.remote.request.RequestDeviceToken
+import com.maic.kurlyhack.util.callback
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     /** 푸시 알림으로 보낼 수 있는 메세지는 2가지
@@ -114,9 +117,18 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //            })
 //    }
 
-    fun getFirebaseToken() {
+    fun getFirebaseToken(id: Int) {
         FirebaseMessaging.getInstance().token.addOnSuccessListener {
             Log.d("###", "token=$it")
+            val requestDeviceToken = RequestDeviceToken(
+                deviceToken = it
+            )
+            KurlyClient.userService.putDeviceToken(
+                id,
+                requestDeviceToken
+            ).callback.onSuccess {
+                Log.d("###", "토큰 전송 성공")
+            }.enqueue()
         }
 
 //        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
