@@ -14,6 +14,7 @@ import com.maic.kurlyhack.R
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.databinding.ActivityPickingBarcodeBinding
 import com.maic.kurlyhack.feature.OnItemClick
+import com.maic.kurlyhack.feature.help.PickingHelp1Activity
 import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
 
@@ -84,6 +85,10 @@ class PickingBarCodeActivity : AppCompatActivity(), OnItemClick {
 
         binding.ivPickingBarcodeMenu.setOnClickListener {
             showDrawer(binding.drawerLayout, binding.navView)
+        }
+
+        binding.ivPickingBarcodeHelp.setOnClickListener {
+            startActivity(Intent(this, PickingHelp1Activity::class.java))
         }
     }
 

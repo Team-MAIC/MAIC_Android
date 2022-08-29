@@ -16,15 +16,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/das_help_8" />
+        app:srcCompat="@drawable/das_help8" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_das_barcode"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/yellow"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:text="DAS 학습 종료하기"
         android:textColor="@color/black"
         android:textSize="22sp"

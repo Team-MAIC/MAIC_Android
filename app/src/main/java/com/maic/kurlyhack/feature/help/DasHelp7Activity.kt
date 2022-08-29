@@ -15,7 +15,7 @@ class DasHelp7Activity : AppCompatActivity() {
 
         initEventListener()
 
-        setContentView(R.layout.activity_das_help7)
+        setContentView(binding.root)
     }
 
     private fun initEventListener() {
@@ -25,11 +25,11 @@ class DasHelp7Activity : AppCompatActivity() {
         }
 
         binding.clDasHelp7.setOnTouchListener(object : OnSwipeTouchListener(this@DasHelp7Activity) {
-            override fun onSwipeRight() {
+            override fun onSwipeLeft() {
                 finish()
                 startActivity(Intent(this@DasHelp7Activity, DasHelp8Activity::class.java))
             }
-            override fun onSwipeLeft() {
+            override fun onSwipeRight() {
                 finish()
                 startActivity(Intent(this@DasHelp7Activity, DasHelp6Activity::class.java))
             }

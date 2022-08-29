@@ -52,11 +52,17 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
         binding.ivSelectPickingNotice.setOnClickListener {
             startActivity(Intent(this@SelectPickingActivity, NoticeActivity::class.java))
         }
+
         binding.ivSelectPickingMenu.setOnClickListener {
             showDrawer(binding.drawerLayout, binding.navView)
         }
+
         binding.ivSelectPickingRefresh.setOnClickListener {
             initAdapter()
+        }
+
+        binding.ivSelectPickingHelp.setOnClickListener {
+            startActivity(Intent(this, PickingHelp1Activity::class.java))
         }
     }
 

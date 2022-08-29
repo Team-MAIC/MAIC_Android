@@ -1,9 +1,8 @@
 package com.maic.kurlyhack.feature.help
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.maic.kurlyhack.R
+import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.databinding.ActivityPickingHelp7Binding
 import com.maic.kurlyhack.feature.OnSwipeTouchListener
 
@@ -13,7 +12,7 @@ class PickingHelp7Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPickingHelp7Binding.inflate(layoutInflater)
         initEventListener()
-        setContentView(R.layout.activity_picking_help7)
+        setContentView(binding.root)
     }
 
     private fun initEventListener() {
@@ -22,14 +21,14 @@ class PickingHelp7Activity : AppCompatActivity() {
             startActivity(Intent(this@PickingHelp7Activity, PickingHelp8Activity::class.java))
         }
 
-        binding.clPickHelp7.setOnTouchListener(object: OnSwipeTouchListener(this@PickingHelp7Activity) {
-            override fun onSwipeRight() {
-                finish()
-                startActivity(Intent(this@PickingHelp7Activity, PickingHelp4Activity::class.java))
-            }
+        binding.clPickHelp7.setOnTouchListener(object : OnSwipeTouchListener(this@PickingHelp7Activity) {
             override fun onSwipeLeft() {
                 finish()
-                startActivity(Intent(this@PickingHelp7Activity, DasHelp2Activity::class.java))
+                startActivity(Intent(this@PickingHelp7Activity, PickingHelp8Activity::class.java))
+            }
+            override fun onSwipeRight() {
+                finish()
+                startActivity(Intent(this@PickingHelp7Activity, PickingHelp6Activity::class.java))
             }
         })
     }

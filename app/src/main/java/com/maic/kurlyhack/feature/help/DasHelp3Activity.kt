@@ -13,7 +13,7 @@ class DasHelp3Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDasHelp3Binding.inflate(layoutInflater)
         initEventListener()
-        setContentView(R.layout.activity_das_help3)
+        setContentView(binding.root)
     }
 
     private fun initEventListener() {
@@ -23,11 +23,11 @@ class DasHelp3Activity : AppCompatActivity() {
         }
 
         binding.clDasHelp3.setOnTouchListener(object : OnSwipeTouchListener(this@DasHelp3Activity) {
-            override fun onSwipeRight() {
-                finish()
-                startActivity(Intent(this@DasHelp3Activity, DasHelp3Activity::class.java))
-            }
             override fun onSwipeLeft() {
+                finish()
+                startActivity(Intent(this@DasHelp3Activity, DasHelp4Activity::class.java))
+            }
+            override fun onSwipeRight() {
                 finish()
                 startActivity(Intent(this@DasHelp3Activity, DasHelp2Activity::class.java))
             }

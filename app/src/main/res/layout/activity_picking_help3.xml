@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pick_help3" />
+        app:srcCompat="@drawable/pick_help2" />
 
     <TextView
         android:id="@+id/tv_pick_help3"

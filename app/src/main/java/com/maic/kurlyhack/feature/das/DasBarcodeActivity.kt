@@ -68,6 +68,9 @@ class DasBarcodeActivity : AppCompatActivity(), OnItemClick {
             showDrawer(binding.drawerLayout, binding.navView)
         }
 
+        binding.ivDasBarcodeHelp.setOnClickListener {
+            startActivity(Intent(this, DasHelp1Activity::class.java))
+        }
     }
 
     private fun checkBarcode(code: String) {

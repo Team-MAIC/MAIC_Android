@@ -46,5 +46,8 @@ class ItemActivity : AppCompatActivity() {
             showDrawer(binding.drawerLayout, binding.navView)
         }
 
+        binding.ivItemHelp.setOnClickListener {
+            startActivity(Intent(this, PickingHelp1Activity::class.java))
+        }
     }
 }
