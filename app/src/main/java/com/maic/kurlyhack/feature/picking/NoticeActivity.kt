@@ -2,6 +2,7 @@ package com.maic.kurlyhack.feature.picking
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.databinding.ActivityNoticeBinding
@@ -26,12 +27,15 @@ class NoticeActivity : AppCompatActivity() {
     private fun initAdapter() {
         noticeAdapter = NoticeAdapter()
         binding.rvNotice.adapter = noticeAdapter
-
         KurlyClient.messageService.getMessage(
-            1
+            intent.getIntExtra("workerId", 0)
         ).callback.onSuccess {
-            noticeAdapter.noticeList.addAll(it.data!!.messages)
-            noticeAdapter.notifyDataSetChanged()
+            if (it.data!!.messages.size == 0) {
+                Toast.makeText(this, "존재하는 알림이 없습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                noticeAdapter.noticeList.addAll(it.data.messages)
+                noticeAdapter.notifyDataSetChanged()
+            }
         }.enqueue()
     }
 

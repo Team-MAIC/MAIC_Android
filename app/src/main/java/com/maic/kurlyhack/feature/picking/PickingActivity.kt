@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.data.remote.request.RequestSubscribe
@@ -36,6 +37,7 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
         initClickListener()
         initCategory()
         connectWebSocket()
+        checkNotice()
 
         setContentView(binding.root)
     }
@@ -192,22 +194,22 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
                     initAdapter(mCategory)
                 }
             }
+    }
 
-        //        stompClient.topic("/pub/pick/todos/1/A")
-        //            .subscribe(
-        //                { topicMessage -> Log.d("message Receive", topicMessage.toString()) }, { throwable -> "a" }
-        //            )
-
-//        Log.d("message", headerList.toString())
-
-//        val data = JSONObject()
-//        data.put("positionType", "1")
-//        data.put("content", "test")
-//        data.put("messageType", "CHAT")
-//        data.put("destRoomCode", "test0912")
-//
-//        stompClient.send("/pub/pick/todos/1/A").subscribe()
-//        stompClient.send("/pub/pick/todos/1/A", "").subscribe({  }, { throwable -> "a" })
+    private fun checkNotice() {
+        Log.d("###", "a")
+        KurlyClient.messageService.getMessage(
+            workerId
+        ).callback.onSuccess {
+            Log.d("###", it.data.toString())
+            if (it.data!!.messages.size == 0) {
+                Log.d("###", "b")
+                binding.ivPickingNoticeYes.visibility = View.INVISIBLE
+            } else {
+                Log.d("###", "c")
+                binding.ivPickingNoticeYes.visibility = View.VISIBLE
+            }
+        }.enqueue()
     }
 
     override fun onClick(value: String) {
