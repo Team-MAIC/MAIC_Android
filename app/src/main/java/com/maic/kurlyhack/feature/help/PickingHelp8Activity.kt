@@ -1,9 +1,9 @@
 package com.maic.kurlyhack.feature.help
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.databinding.ActivityPickingHelp8Binding
 import com.maic.kurlyhack.feature.OnSwipeTouchListener
 
@@ -21,7 +21,7 @@ class PickingHelp8Activity : AppCompatActivity() {
             finish()
         }
 
-        binding.clPickHelp8.setOnTouchListener(object: OnSwipeTouchListener(this@PickingHelp8Activity) {
+        binding.clPickHelp8.setOnTouchListener(object : OnSwipeTouchListener(this@PickingHelp8Activity) {
             override fun onSwipeLeft() {
                 Toast.makeText(this@PickingHelp8Activity, "마지막 페이지입니다.", Toast.LENGTH_SHORT).show()
             }

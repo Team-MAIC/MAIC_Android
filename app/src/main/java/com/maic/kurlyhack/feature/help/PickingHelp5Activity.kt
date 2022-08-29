@@ -28,7 +28,7 @@ class PickingHelp5Activity : AppCompatActivity() {
             }
             override fun onSwipeRight() {
                 finish()
-                startActivity(Intent(this@PickingHelp5Activity, DasHelp4Activity::class.java))
+                startActivity(Intent(this@PickingHelp5Activity, PickingHelp4Activity::class.java))
             }
         })
     }
