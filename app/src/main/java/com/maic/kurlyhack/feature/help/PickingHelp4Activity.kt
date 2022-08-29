@@ -14,7 +14,7 @@ class PickingHelp4Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPickingHelp4Binding.inflate(layoutInflater)
         initEventListener()
-        setContentView(R.layout.activity_picking_help4)
+        setContentView(binding.root)
     }
 
     private fun initEventListener() {
@@ -24,11 +24,11 @@ class PickingHelp4Activity : AppCompatActivity() {
         }
 
         binding.clPickHelp4.setOnTouchListener(object: OnSwipeTouchListener(this@PickingHelp4Activity) {
-            override fun onSwipeRight() {
+            override fun onSwipeLeft() {
                 finish()
                 startActivity(Intent(this@PickingHelp4Activity, PickingHelp5Activity::class.java))
             }
-            override fun onSwipeLeft() {
+            override fun onSwipeRight() {
                 finish()
                 startActivity(Intent(this@PickingHelp4Activity, DasHelp3Activity::class.java))
             }

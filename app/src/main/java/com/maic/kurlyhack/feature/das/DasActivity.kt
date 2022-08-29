@@ -13,7 +13,6 @@ import com.maic.kurlyhack.data.remote.response.BasketItemData
 import com.maic.kurlyhack.databinding.ActivityDasBinding
 import com.maic.kurlyhack.feature.OnItemClick
 import com.maic.kurlyhack.feature.help.DasHelp1Activity
-import com.maic.kurlyhack.feature.help.DasHelp8Activity
 import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
 import org.json.JSONObject
@@ -202,6 +201,9 @@ class DasActivity : AppCompatActivity(), OnItemClick {
             showDrawer(binding.drawerLayout, binding.navView)
         }
 
+        binding.ivDasHelp.setOnClickListener {
+            startActivity(Intent(this, DasHelp1Activity::class.java))
+        }
     }
 
     @SuppressLint("CheckResult")

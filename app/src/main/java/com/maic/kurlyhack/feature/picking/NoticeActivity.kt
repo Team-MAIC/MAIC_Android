@@ -43,5 +43,9 @@ class NoticeActivity : AppCompatActivity() {
         binding.ivNoticeMenu.setOnClickListener {
             showDrawer(binding.drawerLayout, binding.navView)
         }
+
+        binding.ivNoticeHelp.setOnClickListener {
+            startActivity(Intent(this, PickingHelp1Activity::class.java))
+        }
     }
 }

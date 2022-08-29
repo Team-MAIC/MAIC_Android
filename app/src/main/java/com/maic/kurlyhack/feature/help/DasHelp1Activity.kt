@@ -3,6 +3,7 @@ package com.maic.kurlyhack.feature.help
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.maic.kurlyhack.R
 import com.maic.kurlyhack.databinding.ActivityDasHelp1Binding
 import com.maic.kurlyhack.feature.OnSwipeTouchListener
@@ -15,7 +16,7 @@ class DasHelp1Activity : AppCompatActivity() {
 
         initEventListener()
 
-        setContentView(R.layout.activity_das_help1)
+        setContentView(binding.root)
     }
 
     private fun initEventListener() {
@@ -25,9 +26,13 @@ class DasHelp1Activity : AppCompatActivity() {
         }
 
         binding.clDasHelp1.setOnTouchListener(object: OnSwipeTouchListener(this@DasHelp1Activity) {
-            override fun onSwipeRight() {
+            override fun onSwipeLeft() {
                 finish()
                 startActivity(Intent(this@DasHelp1Activity, DasHelp2Activity::class.java))
+            }
+
+            override fun onSwipeRight() {
+                Toast.makeText(this@DasHelp1Activity, "첫번째 페이지입니다.", Toast.LENGTH_SHORT).show()
             }
         })
     }

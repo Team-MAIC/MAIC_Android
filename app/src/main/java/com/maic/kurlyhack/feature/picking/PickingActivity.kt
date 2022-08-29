@@ -103,6 +103,10 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
         binding.tvPickingPart.setOnClickListener {
             finish()
         }
+
+        binding.ivCountPickingHelp.setOnClickListener {
+            startActivity(Intent(this, PickingHelp1Activity::class.java))
+        }
     }
 
     private fun initCategory() {

@@ -13,7 +13,7 @@ class PickingHelp6Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPickingHelp6Binding.inflate(layoutInflater)
         initEventListener()
-        setContentView(R.layout.activity_picking_help6)
+        setContentView(binding.root)
     }
 
     private fun initEventListener() {
@@ -23,11 +23,11 @@ class PickingHelp6Activity : AppCompatActivity() {
         }
 
         binding.clPickHelp6.setOnTouchListener(object: OnSwipeTouchListener(this@PickingHelp6Activity) {
-            override fun onSwipeRight() {
+            override fun onSwipeLeft() {
                 finish()
                 startActivity(Intent(this@PickingHelp6Activity, PickingHelp7Activity::class.java))
             }
-            override fun onSwipeLeft() {
+            override fun onSwipeRight() {
                 finish()
                 startActivity(Intent(this@PickingHelp6Activity, DasHelp5Activity::class.java))
             }
