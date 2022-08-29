@@ -37,9 +37,6 @@
             android:name=".feature.help.DasHelp1Activity"
             android:exported="false" />
         <activity
-            android:name=".feature.help.PickingHelp9Activity"
-            android:exported="false" />
-        <activity
             android:name=".feature.help.PickingHelp8Activity"
             android:exported="false" />
         <activity
