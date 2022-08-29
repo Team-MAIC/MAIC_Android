@@ -3,6 +3,7 @@ package com.maic.kurlyhack.feature.picking
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.databinding.ActivitySelectPickingBinding
@@ -24,6 +25,7 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
         getData()
         initAdapter()
         initClickListener()
+        checkNotice()
 
         setContentView(binding.root)
     }
@@ -50,7 +52,9 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
 
     private fun initClickListener() {
         binding.ivSelectPickingNotice.setOnClickListener {
-            startActivity(Intent(this@SelectPickingActivity, NoticeActivity::class.java))
+            val intent = Intent(this@SelectPickingActivity, NoticeActivity::class.java)
+            intent.putExtra("workerId", workerId)
+            startActivity(intent)
         }
 
         binding.ivSelectPickingMenu.setOnClickListener {
@@ -64,6 +68,18 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
         binding.ivSelectPickingHelp.setOnClickListener {
             startActivity(Intent(this, PickingHelp1Activity::class.java))
         }
+    }
+
+    private fun checkNotice() {
+        KurlyClient.messageService.getMessage(
+            workerId
+        ).callback.onSuccess {
+            if (it.data!!.messages.size == 0) {
+                binding.ivSelectPickingNoticeYes.visibility = View.INVISIBLE
+            } else {
+                binding.ivSelectPickingNoticeYes.visibility = View.VISIBLE
+            }
+        }.enqueue()
     }
 
     override fun onClick(value: String) {

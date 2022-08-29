@@ -58,6 +58,17 @@
             app:srcCompat="@drawable/ic_notice" />
 
         <ImageView
+            android:id="@+id/iv_picking_notice_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="4dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_picking_notice"
+            app:layout_constraintEnd_toEndOf="@+id/iv_picking_notice"
+            app:srcCompat="@drawable/oval_fill_dark_green" />
+
+        <ImageView
             android:id="@+id/iv_count_picking_help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
