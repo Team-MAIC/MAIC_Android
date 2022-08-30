@@ -1,11 +1,7 @@
 package com.maic.kurlyhack.feature.picking
 
-import android.app.Activity
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.data.remote.response.MessageData
@@ -15,7 +11,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
+class NoticeAdapter() : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
     val noticeList = mutableListOf<MessageData>()
 
     class NoticeViewHolder(val binding: ItemNoticeBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -43,12 +39,9 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
             KurlyClient.messageService.putConfirmMessage(
                 noticeList[position].messageId
             ).callback.onSuccess {
-                Log.d("###", "메시지 확인 성공")
+                noticeList.removeAt(position)
+                notifyDataSetChanged()
             }.enqueue()
-            (it.context as Activity).finish()
-            val intent = Intent(it.context, NoticeActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-            (it.context as Activity).startActivity(intent)
         }
     }
 
