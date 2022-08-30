@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.data.remote.response.MessageData
 import com.maic.kurlyhack.databinding.ItemNoticeBinding
+import com.maic.kurlyhack.feature.OnItemClick
 import com.maic.kurlyhack.util.callback
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NoticeAdapter() : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
+class NoticeAdapter(val onItemClick: OnItemClick) : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
     val noticeList = mutableListOf<MessageData>()
 
     class NoticeViewHolder(val binding: ItemNoticeBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -41,6 +42,9 @@ class NoticeAdapter() : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
             ).callback.onSuccess {
                 noticeList.removeAt(position)
                 notifyDataSetChanged()
+                if(noticeList.size == 0) {
+                    onItemClick.onClick("nothing")
+                }
             }.enqueue()
         }
     }
