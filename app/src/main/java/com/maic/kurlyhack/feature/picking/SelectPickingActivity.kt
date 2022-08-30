@@ -1,9 +1,11 @@
 package com.maic.kurlyhack.feature.picking
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.databinding.ActivitySelectPickingBinding
@@ -30,6 +32,17 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
         setContentView(binding.root)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                1000 -> {
+                    binding.ivSelectPickingNoticeYes.visibility = View.INVISIBLE
+                }
+            }
+        }
+    }
+
     private fun getData() {
         workerId = intent.getIntExtra("workerId", 0)
         area = intent.getStringExtra("workerArea").toString()
@@ -54,7 +67,7 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
         binding.ivSelectPickingNotice.setOnClickListener {
             val intent = Intent(this@SelectPickingActivity, NoticeActivity::class.java)
             intent.putExtra("workerId", workerId)
-            startActivity(intent)
+            startActivityForResult(intent, 1000)
         }
 
         binding.ivSelectPickingMenu.setOnClickListener {
@@ -91,6 +104,6 @@ class SelectPickingActivity : AppCompatActivity(), OnItemClick {
         intent.putExtra("centerRoundNumber", value[1])
         intent.putExtra("area", area)
         intent.putExtra("workerId", workerId)
-        startActivity(intent)
+        startActivityForResult(intent, 1000)
     }
 }

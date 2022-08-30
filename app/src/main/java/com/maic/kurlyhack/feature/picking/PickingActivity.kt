@@ -1,10 +1,12 @@
 package com.maic.kurlyhack.feature.picking
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.data.remote.request.RequestSubscribe
@@ -40,6 +42,17 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
         checkNotice()
 
         setContentView(binding.root)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                1000 -> {
+                    binding.ivPickingNoticeYes.visibility = View.INVISIBLE
+                }
+            }
+        }
     }
 
     private fun getData() {
@@ -95,7 +108,7 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
         binding.ivPickingNotice.setOnClickListener {
             val intent = Intent(this@PickingActivity, NoticeActivity::class.java)
             intent.putExtra("workerId", workerId)
-            startActivity(intent)
+            startActivityForResult(intent, 1000)
         }
 
         binding.ivPickingMenu.setOnClickListener {
@@ -103,6 +116,8 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
         }
 
         binding.tvPickingPart.setOnClickListener {
+            val intent = Intent(this@PickingActivity, SelectPickingActivity::class.java)
+            setResult(Activity.RESULT_OK, intent)
             finish()
         }
 
@@ -197,16 +212,12 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
     }
 
     private fun checkNotice() {
-        Log.d("###", "a")
         KurlyClient.messageService.getMessage(
             workerId
         ).callback.onSuccess {
-            Log.d("###", it.data.toString())
             if (it.data!!.messages.size == 0) {
-                Log.d("###", "b")
                 binding.ivPickingNoticeYes.visibility = View.INVISIBLE
             } else {
-                Log.d("###", "c")
                 binding.ivPickingNoticeYes.visibility = View.VISIBLE
             }
         }.enqueue()
@@ -230,5 +241,10 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
             intent.putExtra("picture", value[4])
             startActivity(intent)
         }
+    }
+
+    override fun onBackPressed() {
+        // super.onBackPressed()
+        Toast.makeText(this, "회차를 눌러주세요.", Toast.LENGTH_SHORT).show()
     }
 }

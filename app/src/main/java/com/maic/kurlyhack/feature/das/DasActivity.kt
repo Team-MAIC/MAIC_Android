@@ -43,6 +43,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
     private fun getData() {
         centerId = intent.getIntExtra("centerId", 0)
         passage = intent.getStringExtra("area")!!.toInt()
+        workerId = intent.getIntExtra("workerId", 0)
         KurlyClient.dasService.getBoxData(
             centerId,
             passage
@@ -249,17 +250,24 @@ class DasActivity : AppCompatActivity(), OnItemClick {
                     val jObject = JSONObject(it.payload)
                     val dataObject = jObject.getJSONObject("data")
                     val idxObject = dataObject.getJSONObject("idx")
-                    val todoObject = dataObject.getJSONObject("todo")
                     val clientIdx = idxObject.getInt("clientIdx")
                     val basketNum = idxObject.getInt("basketNum")
-                    val currentAmount = todoObject.getInt("currentAmount")
-                    val color = todoObject.getString("color")
-                    val status = todoObject.getString("status")
-                    Log.d("###", "$clientIdx $basketNum")
-                    Log.d("###", "$currentAmount $color $status")
+                    if (it.payload.length < 100) {
+                        runOnUiThread {
+                            dasAdapter.notifyItemChanged(clientIdx, "finish")
+                        }
+                    } else {
+                        val todoObject = dataObject.getJSONObject("todo")
+                        val currentAmount = todoObject.getInt("currentAmount")
+                        val color = todoObject.getString("color")
+                        val status = todoObject.getString("status")
+                        val name = todoObject.getString("productName")
+                        Log.d("###", "$clientIdx $basketNum")
+                        Log.d("###", "$currentAmount $color $status")
 
-                    runOnUiThread {
-                        dasAdapter.notifyItemChanged(clientIdx, "$currentAmount $color $status")
+                        runOnUiThread {
+                            dasAdapter.notifyItemChanged(clientIdx, "$currentAmount,$color,$status,$name")
+                        }
                     }
                 }
             }
@@ -299,6 +307,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
         intent.putExtra("roundId", roundId)
         intent.putExtra("centerRoundNumber", centerRoundNumber)
         intent.putExtra("workerId", workerId)
+        Log.d("###w", workerId.toString())
         startActivity(intent)
     }
 }
