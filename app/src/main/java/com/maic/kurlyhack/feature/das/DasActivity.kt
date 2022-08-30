@@ -43,6 +43,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
     private fun getData() {
         centerId = intent.getIntExtra("centerId", 0)
         passage = intent.getStringExtra("area")!!.toInt()
+        workerId = intent.getIntExtra("workerId", 0)
         KurlyClient.dasService.getBoxData(
             centerId,
             passage
@@ -247,7 +248,6 @@ class DasActivity : AppCompatActivity(), OnItemClick {
             .subscribe {
                 if (it != null) {
                     val jObject = JSONObject(it.payload)
-                    Log.d("###", it.payload.length.toString())
                     val dataObject = jObject.getJSONObject("data")
                     val idxObject = dataObject.getJSONObject("idx")
                     val clientIdx = idxObject.getInt("clientIdx")
@@ -307,6 +307,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
         intent.putExtra("roundId", roundId)
         intent.putExtra("centerRoundNumber", centerRoundNumber)
         intent.putExtra("workerId", workerId)
+        Log.d("###w", workerId.toString())
         startActivity(intent)
     }
 }
