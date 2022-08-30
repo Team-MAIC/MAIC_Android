@@ -28,6 +28,8 @@ class DasActivity : AppCompatActivity(), OnItemClick {
     var filterId = 0
     var centerRoundNumber = 0
     var workerId = 0
+    val url = "wss://project-maic.com/wss/websocket" // 소켓에 연결하는 엔드포인트가 /socket일때 다음과 같음
+    val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
         ).callback.onSuccess {
             if (it.code == 4001) {
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                binding.btnDasBarcode.isEnabled = false
             } else {
                 binding.tvDasDetailPart.text = passage.toString() + "번 통로 : " + it.data!!.centerRoundNumber + "회차"
                 roundId = it.data!!.roundId
@@ -209,10 +212,6 @@ class DasActivity : AppCompatActivity(), OnItemClick {
 
     @SuppressLint("CheckResult")
     private fun connectWebSocket() {
-
-        val url = "wss://project-maic.com/wss/websocket" // 소켓에 연결하는 엔드포인트가 /socket일때 다음과 같음
-        val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
-
         stompClient.lifecycle().subscribe { lifecycleEvent ->
             when (lifecycleEvent.type) {
                 LifecycleEvent.Type.OPENED -> {
@@ -224,6 +223,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
                 LifecycleEvent.Type.ERROR -> {
                     Log.d("ERROR", "!!")
                     Log.d("CONNECT ERROR", lifecycleEvent.exception.toString())
+                    connectWebSocket()
                 }
                 else -> {
                     Log.d("ELSE", lifecycleEvent.message)
@@ -309,5 +309,10 @@ class DasActivity : AppCompatActivity(), OnItemClick {
         intent.putExtra("workerId", workerId)
         Log.d("###w", workerId.toString())
         startActivity(intent)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stompClient.disconnect()
     }
 }
