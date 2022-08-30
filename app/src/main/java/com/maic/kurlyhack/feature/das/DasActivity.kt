@@ -259,6 +259,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
                     } else {
                         val todoObject = dataObject.getJSONObject("todo")
                         val currentAmount = todoObject.getInt("currentAmount")
+                        val productAmount = todoObject.getInt("productAmount")
                         val color = todoObject.getString("color")
                         val status = todoObject.getString("status")
                         val name = todoObject.getString("productName")
@@ -266,7 +267,7 @@ class DasActivity : AppCompatActivity(), OnItemClick {
                         Log.d("###", "$currentAmount $color $status")
 
                         runOnUiThread {
-                            dasAdapter.notifyItemChanged(clientIdx, "$currentAmount,$color,$status,$name")
+                            dasAdapter.notifyItemChanged(clientIdx, "$currentAmount,$productAmount,$color,$status,$name")
                         }
                     }
                 }
