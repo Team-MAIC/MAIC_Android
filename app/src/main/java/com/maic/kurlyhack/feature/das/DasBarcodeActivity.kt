@@ -3,7 +3,6 @@ package com.maic.kurlyhack.feature.das
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.ResultPoint
@@ -16,7 +15,6 @@ import com.maic.kurlyhack.data.remote.KurlyClient
 import com.maic.kurlyhack.databinding.ActivityDasBarcodeBinding
 import com.maic.kurlyhack.feature.OnItemClick
 import com.maic.kurlyhack.feature.help.DasHelp1Activity
-import com.maic.kurlyhack.feature.help.DasHelp8Activity
 import com.maic.kurlyhack.feature.picking.BarcodeDialog
 import com.maic.kurlyhack.util.callback
 import com.maic.kurlyhack.util.showDrawer
@@ -88,23 +86,22 @@ class DasBarcodeActivity : AppCompatActivity(), OnItemClick {
                     if (it.code == 4002) {
                         val dialog = BarcodeErrorDialog(this)
                         dialog.showDialog(this)
-                    } else {
+                    } else if (it.code == 1) {
                         Log.d("###", "다스 바코드 데이터 전송 완료")
                         finish()
                         val intent = Intent(this, DasActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
                         startActivity(intent)
+                    } else if (it.code == 2003) {
+                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                        finish()
                     }
                 }.enqueue()
-            } else {
-                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                finish()
             }
         }.enqueue()
     }
 
     override fun onClick(value: String) {
-        Log.d("####", value)
         if (value == "ok") {
             finish()
         }
