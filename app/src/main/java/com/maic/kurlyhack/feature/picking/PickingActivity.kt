@@ -28,6 +28,8 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
     private var mCategory = 10
     private var roundId = 0
     private var centerRoundNumber = ""
+    val url = "wss://project-maic.com/wss/websocket" // 소켓에 연결하는 엔드포인트가 /socket일때 다음과 같음
+    val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -167,10 +169,6 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
 
     @SuppressLint("CheckResult")
     private fun connectWebSocket() {
-
-        val url = "wss://project-maic.com/wss/websocket" // 소켓에 연결하는 엔드포인트가 /socket일때 다음과 같음
-        val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
-
         stompClient.lifecycle().subscribe { lifecycleEvent ->
             when (lifecycleEvent.type) {
                 LifecycleEvent.Type.OPENED -> {
@@ -182,6 +180,7 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
                 LifecycleEvent.Type.ERROR -> {
                     Log.d("ERROR", "!!")
                     Log.d("CONNECT ERROR", lifecycleEvent.exception.toString())
+                    connectWebSocket()
                 }
                 else -> {
                     Log.d("ELSE", lifecycleEvent.message)
@@ -246,5 +245,10 @@ class PickingActivity : AppCompatActivity(), OnItemClick {
     override fun onBackPressed() {
         // super.onBackPressed()
         Toast.makeText(this, "회차를 눌러주세요.", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stompClient.disconnect()
     }
 }
