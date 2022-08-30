@@ -97,10 +97,10 @@ class DasAdapter(private val onItemClick: OnItemClick) :
             } else {
                 var myPayLoads = payloads.toString()
                 val count = myPayLoads.split(",")[0].substring(1)
-                val color = myPayLoads.split(",")[1]
-                val status = myPayLoads.split(",")[2]
-                val name = myPayLoads.split(",")[3].substring(0, myPayLoads.split(",")[3].length - 1)
-                Log.d("###", name)
+                val pCount = myPayLoads.split(",")[1]
+                val color = myPayLoads.split(",")[2]
+                val status = myPayLoads.split(",")[3]
+                val name = myPayLoads.split(",")[4].substring(0, myPayLoads.split(",")[4].length - 1)
 
                 when (color) {
                     "RED" -> holder.binding.ivDasColor.setImageResource(R.drawable.oval_fill_red)
@@ -114,6 +114,7 @@ class DasAdapter(private val onItemClick: OnItemClick) :
                 }
                 holder.binding.tvDasCountCurrent.text = "(현재 " + count + "개)"
                 holder.binding.tvDasName.text = name
+                holder.binding.tvDasCount.text = pCount + "개"
 
                 holder.itemView.setOnClickListener {
                     val item = dasList[position].todo
