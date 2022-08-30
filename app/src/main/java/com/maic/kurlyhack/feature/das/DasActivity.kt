@@ -247,19 +247,27 @@ class DasActivity : AppCompatActivity(), OnItemClick {
             .subscribe {
                 if (it != null) {
                     val jObject = JSONObject(it.payload)
+                    Log.d("###", it.payload.length.toString())
                     val dataObject = jObject.getJSONObject("data")
                     val idxObject = dataObject.getJSONObject("idx")
-                    val todoObject = dataObject.getJSONObject("todo")
                     val clientIdx = idxObject.getInt("clientIdx")
                     val basketNum = idxObject.getInt("basketNum")
-                    val currentAmount = todoObject.getInt("currentAmount")
-                    val color = todoObject.getString("color")
-                    val status = todoObject.getString("status")
-                    Log.d("###", "$clientIdx $basketNum")
-                    Log.d("###", "$currentAmount $color $status")
+                    if (it.payload.length < 100) {
+                        runOnUiThread {
+                            dasAdapter.notifyItemChanged(clientIdx, "finish")
+                        }
+                    } else {
+                        val todoObject = dataObject.getJSONObject("todo")
+                        val currentAmount = todoObject.getInt("currentAmount")
+                        val color = todoObject.getString("color")
+                        val status = todoObject.getString("status")
+                        val name = todoObject.getString("productName")
+                        Log.d("###", "$clientIdx $basketNum")
+                        Log.d("###", "$currentAmount $color $status")
 
-                    runOnUiThread {
-                        dasAdapter.notifyItemChanged(clientIdx, "$currentAmount $color $status")
+                        runOnUiThread {
+                            dasAdapter.notifyItemChanged(clientIdx, "$currentAmount,$color,$status,$name")
+                        }
                     }
                 }
             }

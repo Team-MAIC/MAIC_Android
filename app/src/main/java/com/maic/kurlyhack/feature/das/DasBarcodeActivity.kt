@@ -96,6 +96,9 @@ class DasBarcodeActivity : AppCompatActivity(), OnItemClick {
                         startActivity(intent)
                     }
                 }.enqueue()
+            } else {
+                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                finish()
             }
         }.enqueue()
     }
