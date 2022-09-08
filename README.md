@@ -26,5 +26,6 @@ https://user-images.githubusercontent.com/61824695/189130821-d0e3840b-cbd1-470d-
 ## 기술 스택
 - Kotlin
 - Websocket
+- Firebase
 - Viewbinding
 - Retrofit2
